@@ -1,4 +1,6 @@
 #include "../include/bm280_driver.h"
+#include <stdio.h>
+#include "pico/stdio.h"
 
 // handle
 struct bm280_handle{
