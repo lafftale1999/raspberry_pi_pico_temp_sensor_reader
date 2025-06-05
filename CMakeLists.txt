@@ -34,8 +34,10 @@ project(raspberry_pico_w_bme280_i2c C CXX ASM)
 pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
-
-add_executable(raspberry_pico_w_bme280_i2c raspberry_pico_w_bme280_i2c.c )
+FILE(GLOB SRC_FILES src/*.c)
+add_executable(raspberry_pico_w_bme280_i2c
+    main.c
+    ${SRC_FILES})
 
 pico_set_program_name(raspberry_pico_w_bme280_i2c "raspberry_pico_w_bme280_i2c")
 pico_set_program_version(raspberry_pico_w_bme280_i2c "0.1")
@@ -51,6 +53,7 @@ target_link_libraries(raspberry_pico_w_bme280_i2c
 # Add the standard include files to the build
 target_include_directories(raspberry_pico_w_bme280_i2c PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
+        ${CMAKE_CURRENT_LIST_DIR}/include
 )
 
 # Add any user requested libraries
@@ -60,4 +63,3 @@ target_link_libraries(raspberry_pico_w_bme280_i2c
         )
 
 pico_add_extra_outputs(raspberry_pico_w_bme280_i2c)
-
