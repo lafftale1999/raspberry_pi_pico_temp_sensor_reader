@@ -1,6 +1,6 @@
 #include "pico/stdio.h"
 #include <stdio.h>
-#include "include/i2c_driver.h"
+#include "include/i2c_internal.h"
 #include "include/config.h"
 
 PICO_W_RETURN_STATUS _i2c_init() {
@@ -23,6 +23,7 @@ PICO_W_RETURN_STATUS write_data(const uint8_t *device_address, uint8_t *data, co
     return PICO_W_OK;
 }
 
+
 PICO_W_RETURN_STATUS read_data(const uint8_t *device_address, const uint8_t *d_register, uint8_t *buf, const size_t buf_size) {
     // Start with a pointer to where we should start reading.
     int err = i2c_write_blocking(I2C_PORT, *device_address, d_register, 1, true);
@@ -36,6 +37,8 @@ PICO_W_RETURN_STATUS read_data(const uint8_t *device_address, const uint8_t *d_r
     if (err == PICO_ERROR_GENERIC) {
         printf("read_data() | Unable to read from i2c buss");
     }
+
+    return PICO_W_OK;
 }
 
 PICO_W_RETURN_STATUS scan_i2c_bus() {
