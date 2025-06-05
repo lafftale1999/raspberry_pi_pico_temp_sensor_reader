@@ -1,5 +1,6 @@
 #include "include/i2c_external.h"
 #include "include/bm280_driver.h"
+#include "include/pico_wifi.h"
 
 int main()
 {
@@ -15,6 +16,8 @@ int main()
     if (bm280_init(&handle, 0x76, INTERVAL_1000MS) == PICO_W_OK) {
         printf("device succesfully init\n");
     }
+    
+    wifi_init();
     
     while(1) {
         bm280_read_data(handle);
