@@ -5,10 +5,10 @@
 #include "hardware/gpio.h"
 #include "config.h"
 
-#define I2C_SDA_PIN                 14   
-#define I2C_SCL_PIN                 15
-#define I2C_PORT                    i2c1
-#define I2C_FREQUENCY               100000          // 100KHz
+#define I2C_SDA_PIN                 14              // GPIO
+#define I2C_SCL_PIN                 15              // GPIO 
+#define I2C_PORT                    i2c1            // Which I2C module is used for communication
+#define I2C_FREQUENCY               100000          // Frequency for communication
 
 PICO_W_RETURN_STATUS _i2c_init();
 PICO_W_RETURN_STATUS write_data(const uint8_t *device_address, uint8_t *data, const size_t len, bool keepMaster);

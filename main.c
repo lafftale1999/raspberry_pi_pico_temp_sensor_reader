@@ -1,21 +1,23 @@
-#include <stdio.h>
-#include "pico/stdlib.h"
-#include "include/i2c_driver.h"
+#include "include/i2c_external.h"
+#include "include/bm280_driver.h"
 
 int main()
 {
     stdio_init_all();
-    sleep_ms(10000);
+    sleep_ms(5000);
 
     printf("Start I2C init\n");
-    if (_i2c_init() == PICO_W_OK) {
+    if (i2c_open() == PICO_W_OK) {
         printf("i2c init succesful!\n");
+    }
+
+    bm280_handle_t handle = NULL;
+    if (bm280_init(&handle, 0x76, INTERVAL_1000MS) == PICO_W_OK) {
+        printf("device succesfully init\n");
     }
     
     while(1) {
-        scan_i2c_bus();
-        
-        printf("Hello World!\n");
-        sleep_ms(1000);
+        bm280_read_data(handle);
+        sleep_ms(5000);
     }
 }
