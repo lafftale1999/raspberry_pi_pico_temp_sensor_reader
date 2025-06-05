@@ -23,7 +23,7 @@ PICO_W_RETURN_STATUS write_data(const uint8_t *device_address, uint8_t *data, co
     return PICO_W_OK;
 }
 
-PICO_W_RETURN_STATUS read_data(const uint8_t *device_address, const uint8_t *d_register, uint8_t *buf, const size_t len) {
+PICO_W_RETURN_STATUS read_data(const uint8_t *device_address, const uint8_t *d_register, uint8_t *buf, const size_t buf_size) {
     // Start with a pointer to where we should start reading.
     int err = i2c_write_blocking(I2C_PORT, *device_address, d_register, 1, true);
     if (err == PICO_ERROR_GENERIC) {
@@ -32,7 +32,7 @@ PICO_W_RETURN_STATUS read_data(const uint8_t *device_address, const uint8_t *d_r
     }
 
     // The BM280s data registers are autoincrementing - so start reading from a certain address ex 0xF7 (pressure MSB) -> 0xFE (humidity LSB).
-    err = i2c_read_blocking(I2C_PORT, *device_address, buf, len, false);
+    err = i2c_read_blocking(I2C_PORT, *device_address, buf, buf_size, false);
     if (err == PICO_ERROR_GENERIC) {
         printf("read_data() | Unable to read from i2c buss");
     }

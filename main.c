@@ -18,5 +18,4 @@ int main()
         printf("Hello World!\n");
         sleep_ms(1000);
     }
-    
 }
