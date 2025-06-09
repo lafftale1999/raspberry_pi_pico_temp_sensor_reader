@@ -20,6 +20,7 @@ struct bm280_handle_internal{
     uint8_t i2c_address;
     uint8_t address_length;
     
+    // These are used for converting the measurements made by the sensor
     struct {
         struct {
             uint16_t dig_t1;
@@ -50,12 +51,20 @@ struct bm280_handle_internal{
     } cal_val;
 };
 
+/*!
+Calibration needed for converting the measurement values from the BM280.
+
+    \param handle handle for the bm280 device. Used to manipulate the cal_val.
+    
+    \return PICO_W_OK parameters set. PICO_W_FAIL failed to set parameters.
+*/
 PICO_W_RETURN_STATUS bm280_calibration(bm280_handle_t handle) {
     
     uint8_t buf[BM280_AMOUNT_CALIB_PARAMS] = {0};
     
     uint8_t t_p_param_start = BM280_TEMP_CALIB_PARAM_START;
     // read temperature and pressure calibration values
+    
     if (read_data(&handle->i2c_address, &t_p_param_start, buf, BM280_TEMP_PARAMS_LEN + BM280_PRESS_PARAMS_LEN) != PICO_W_OK) {
         printf("Unable to read temperature and pressure calibration values\n");
         return PICO_W_FAIL;
@@ -166,6 +175,13 @@ PICO_W_RETURN_STATUS bm280_convert_humidity(bm280_handle_t handle) {
     return PICO_W_OK;
 }
 
+/*!
+    Converts the measurements fetched from the BM280. Important to convert them in the set order, otherwhise you will get unexpected results.
+
+    \param handle device handle to convert measurements from.
+
+    \return PICO_W_OK measurements converted. PICO_W_FAIL measurements failed to convert.
+*/
 PICO_W_RETURN_STATUS bm280_convert_measurements(bm280_handle_t handle) {
     if (bm280_convert_temperature(handle) != PICO_W_OK) {
         printf("Unable to convert temperature\n");
@@ -173,12 +189,41 @@ PICO_W_RETURN_STATUS bm280_convert_measurements(bm280_handle_t handle) {
     }
 
     if (bm280_convert_pressure(handle) != PICO_W_OK) {
-
+        printf("Unable to convert pressure\n");
+        return PICO_W_FAIL;
     }
-    bm280_convert_humidity(handle);
+
+    if (bm280_convert_humidity(handle) != PICO_W_OK) {
+        printf("Unable to convert humidity\n");
+        return PICO_W_FAIL;
+    }
+
+    return PICO_W_OK;
 }
 
-// init
+PICO_W_RETURN_STATUS bm280_read_data(bm280_handle_t handle) {
+
+    uint8_t buf[BM280_READ_VALUES_REG_LEN];
+    uint8_t register_start = BM280_READ_VALUES_REG_START;
+
+    if(read_data(&handle->i2c_address, &register_start, buf, BM280_READ_VALUES_REG_LEN) != PICO_W_OK) {
+        printf("Unable to read data from registers.\n");
+        return PICO_W_FAIL;
+    }
+    handle->press_raw = (buf[0] << 12) | (buf[1] << 4) | (buf[2] >> 4); 
+    handle->temp_raw = (buf[3] << 12) | (buf[4] << 4) | (buf[5] >> 4);
+    handle->hum_raw = (buf[6] << 8) | buf[7];
+
+    if(bm280_convert_measurements(handle) != PICO_W_OK) {
+        printf("Unable to convert values.\n");
+        return PICO_W_FAIL;
+    }
+
+    printf("Temp: %0.1fC | Humidity: %0.1f%% | Pressure: %0.1fhPa\n", (float)handle->temperature / 100.0f, (float)handle->humidity / 1024.0f, ((float)handle->pressure / 256.0f) / 100.0f);
+
+    return PICO_W_OK;
+}
+
 PICO_W_RETURN_STATUS bm280_init(bm280_handle_t *handle, const uint8_t device_address, const BM280_READING_INTERVALS_MS interval) {
     bm280_handle_t p_handle = malloc(sizeof(struct bm280_handle_internal));
 
@@ -209,11 +254,12 @@ PICO_W_RETURN_STATUS bm280_init(bm280_handle_t *handle, const uint8_t device_add
         BM280_SET_STANDBY_MS(interval) | BM280_SET_IIR_FILTER(BM280_SET_FILTER_16)
     };
 
+    // Making sure that all configurations are set up correctly
     if (write_data(&p_handle->i2c_address, humidity_set_up, 2, true) != PICO_W_OK ||
         write_data(&p_handle->i2c_address, config_set_up, 2, true) != PICO_W_OK ||
         write_data(&p_handle->i2c_address, measurement_set_up, 2, false) != PICO_W_OK){
         printf("Unable to correctly set up configurations on bm280.\n");
-        return PICO_W_FAIL;
+        goto exit;
     }
 
     *handle = p_handle;
@@ -228,29 +274,6 @@ exit:
     }
 
     return PICO_W_FAIL;
-}
-
-PICO_W_RETURN_STATUS bm280_read_data(bm280_handle_t handle) {
-
-    uint8_t buf[BM280_READ_VALUES_REG_LEN];
-    uint8_t register_start = BM280_READ_VALUES_REG_START;
-
-    if(read_data(&handle->i2c_address, &register_start, buf, BM280_READ_VALUES_REG_LEN) != PICO_W_OK) {
-        printf("Unable to read data from registers.\n");
-        return PICO_W_FAIL;
-    }
-    handle->press_raw = (buf[0] << 12) | (buf[1] << 4) | (buf[2] >> 4); 
-    handle->temp_raw = (buf[3] << 12) | (buf[4] << 4) | (buf[5] >> 4);
-    handle->hum_raw = (buf[6] << 8) | buf[7];
-
-    if(bm280_convert_measurements(handle) != PICO_W_OK) {
-        printf("Unable to convert values.\n");
-        return PICO_W_FAIL;
-    }
-
-    printf("Temp: %0.1fC | Humidity: %0.1f%% | Pressure: %0.1fhPa\n", (float)handle->temperature / 100.0f, (float)handle->humidity / 1024.0f, ((float)handle->pressure / 256.0f) / 100.0f);
-
-    return PICO_W_OK;
 }
 
 int32_t get_temperature(bm280_handle_t handle) {

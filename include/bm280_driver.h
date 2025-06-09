@@ -63,23 +63,26 @@
 
 // HUMIDITY
 #define BM280_CONTROL_HUMIDITY              0xF2                // Controls the oversampling of humidity data. 
-#define BM280_SET_HUM_OSRS(osrs_h)          ((osrs_h) & 0x07)   // use together with BM280_OSRS_XXX
-
-#define BM280_HUMIDITY_REG_MSB              0xFD
-#define BM280_HUMIDITY_REG_LSB              0xFE             
+#define BM280_SET_HUM_OSRS(osrs_h)          ((osrs_h) & 0x07)   // use together with BM280_OSRS_XXX            
 
 /* TEMPERATURE & PRESSURE
     BM280_SET_TEMP_OSRS(BM280_OSRS_XN) to set temperature OSRS
     BM280_SET_PRESS_OSRS(BM280_OSRS_XN) to set pressure OSRS
-    BM280_MODE_XXX to set reader mode.
+    BM280_SET_MODE(BM280_MODE_XXX) to set reader mode.
 */
-#define BM280_CONTROL_MEASURE               0xF4
+#define BM280_CONTROL_MEASURE               0xF4                        // register for setting the temp and press OSRS, and setting the reader mode
 #define BM280_SET_TEMP_OSRS(osrs_t)         (((osrs_t) & 0x07) << 5)    // use together with BM280_OSRS_XXX
 #define BM280_SET_PRESS_OSRS(osrs_p)        (((osrs_p) & 0x07) << 2)    // use together with BM280_OSRS_XXX
 
-#define BM280_MODE_NORMAL                   0b11                // perpetual cycling of measurements and inactive periods.
-#define BM280_MODE_SLEEP                    0b00                // no operation, all registers accessible, lowest power, selected after startup
-#define BM280_MODE_FORCED                   0b01                // perform one measurement, store results and return to sleep mode
+#define BM280_MODE_NORMAL                   0b11                // Argument for BM280_SET_MODE | perpetual cycling of measurements and inactive periods.
+#define BM280_MODE_SLEEP                    0b00                // Argument for BM280_SET_MODE | no operation, all registers accessible, lowest power, selected after startup
+#define BM280_MODE_FORCED                   0b01                // Argument for BM280_SET_MODE | perform one measurement, store results and return to sleep mode
+#define BM280_SET_MODE(mode)                ((mode) & 0x03)     // Use BM280_MODE_XXX to set specified mode accepted by BM280
+
+/* all data registers for reading values*/
+
+#define BM280_HUMIDITY_REG_MSB              0xFD
+#define BM280_HUMIDITY_REG_LSB              0xFE 
 
 #define BM280_PRESS_REG_MSB                 0xF7
 #define BM280_PRESS_REG_LSB                 0xF8
@@ -91,15 +94,16 @@
 
 #define BM280_READ_VALUES_REG_START         0xF7
 #define BM280_READ_VALUES_REG_LEN           8
-// CONFIGURATION
+
+// CONFIGURATION FOR BM280
 #define BM280_CONFIG_REGISTER               0xF5
 #define BM280_SET_STANDBY_MS(ms)            (((ms) & 0x07) << 5)    // Use together with BM280_READ_INTERVALS_MS
 #define BM280_SET_IIR_FILTER(fc)            (((fc) & 0x07) << 2)    // Use together with BM280_SET_FILTER_XXX
 
-
 // Handle for bm280 driver
 typedef struct bm280_handle_internal *bm280_handle_t;
 
+// bits to set the predetermined intervals for the BM280
 typedef enum {
     INTERVAL_0_5MS      = 0b000,
     INTERVAL_62_5MS     = 0b001,
@@ -111,7 +115,36 @@ typedef enum {
     INTERVAL_20MS       = 0b111
 } BM280_READING_INTERVALS_MS;
 
+/*!
+    Initializes the BM280 by allocating the datastructure on the heap, fills the calibration parameters and configure its set-up.
+
+    \param handle pointer to the handle structure.
+    \param device_address address to the device on the I2C bus.
+    \param interval enum of predetermined intervals defined for the BM280.
+
+    \return PICO_W_OK successfully initialized. PICO_W_FAIL unable to initialize.
+*/
 PICO_W_RETURN_STATUS bm280_init(bm280_handle_t *handle, const uint8_t device_address, const BM280_READING_INTERVALS_MS interval);
+
+/*!
+    Reads the data from the device related to the handle passed in argument.
+
+    \param handle device handle for reading data
+
+    \return PICO_W_OK data has been read and saved properly. PICO_W_FAIL data was unable to be read.
+*/
 PICO_W_RETURN_STATUS bm280_read_data(bm280_handle_t handle);
+
+int32_t get_temperature(bm280_handle_t handle) {
+    return handle->temperature;
+}
+
+uint32_t get_pressure(bm280_handle_t handle) {
+    return handle->pressure;
+}
+
+uint32_t get_humidity(bm280_handle_t handle) {
+    return handle->humidity;
+}
 
 #endif
