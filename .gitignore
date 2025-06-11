@@ -1,3 +1,9 @@
 build
 !.vscode/*
 include/config.h
+include/pico_credentials.h
+src/pico_credentials.c
+certs/*
+*.key
+*.crt
+*.csr

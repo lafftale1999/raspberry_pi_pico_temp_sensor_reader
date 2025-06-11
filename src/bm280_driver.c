@@ -3,8 +3,12 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
 #include "pico/stdio.h"
 #include "pico/stdlib.h"
+
+static bool json_parsed = false;
 
 // handle
 struct bm280_handle_internal{
@@ -19,6 +23,8 @@ struct bm280_handle_internal{
 
     uint8_t i2c_address;
     uint8_t address_length;
+
+    char json_string[BM280_JSON_STR_MAX_LEN];
     
     // These are used for converting the measurements made by the sensor
     struct {
@@ -50,6 +56,36 @@ struct bm280_handle_internal{
         } hum;
     } cal_val;
 };
+
+int parse_json(bm280_handle_t handle) {
+    json_parsed = true;
+    const char* keys[BM280_JSON_KEYS_LEN] = BM280_JSON_KEYS;
+    char buf[BM280_JSON_BUF_SIZE];
+    
+    snprintf(handle->json_string, BM280_JSON_STR_MAX_LEN, "{");
+
+    for(size_t i = 0; i < BM280_JSON_KEYS_SIZE; i++) {
+        if (strcmp(keys[i], BM280_JSON_TEMP_KEY) == 0) {
+            snprintf(buf, sizeof(buf), "\"%s\":%u", keys[i], handle->temperature);
+        }
+        else if(strcmp(keys[i], BM280_JSON_PRESS_KEY) == 0) {
+            snprintf(buf, sizeof(buf), "\"%s\":%d", keys[i], handle->pressure);
+        }
+        else if(strcmp(keys[i], BM280_JSON_HUM_KEY) == 0) {
+            snprintf(buf, sizeof(buf), "\"%s\":%d", keys[i], handle->humidity);
+        }
+
+
+        strncat(handle->json_string, buf, BM280_JSON_STR_MAX_LEN - strlen(handle->json_string) - 1);
+        if (i < BM280_JSON_KEYS_SIZE - 1) {
+            strncat(handle->json_string, ",", BM280_JSON_STR_MAX_LEN - strlen(handle->json_string) - 1);
+        }
+    }
+
+    strncat(handle->json_string, "}", BM280_JSON_STR_MAX_LEN - strlen(handle->json_string) - 1);
+
+    return 0;
+}
 
 /*!
 Calibration needed for converting the measurement values from the BM280.
@@ -219,6 +255,8 @@ PICO_W_RETURN_STATUS bm280_read_data(bm280_handle_t handle) {
         return PICO_W_FAIL;
     }
 
+    parse_json(handle);
+
     printf("Temp: %0.1fC | Humidity: %0.1f%% | Pressure: %0.1fhPa\n", (float)handle->temperature / 100.0f, (float)handle->humidity / 1024.0f, ((float)handle->pressure / 256.0f) / 100.0f);
 
     return PICO_W_OK;
@@ -276,14 +314,11 @@ exit:
     return PICO_W_FAIL;
 }
 
-int32_t get_temperature(bm280_handle_t handle) {
-    return handle->temperature;
-}
-
-uint32_t get_pressure(bm280_handle_t handle) {
-    return handle->pressure;
-}
-
-uint32_t get_humidity(bm280_handle_t handle) {
-    return handle->humidity;
+const char* BM280_get_json(bm280_handle_t handle) {
+    if (json_parsed){
+        return handle->json_string;
+    }
+    else {
+        return NULL;
+    }
 }

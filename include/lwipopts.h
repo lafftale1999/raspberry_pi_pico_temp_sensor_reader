@@ -1,5 +1,11 @@
-#ifndef __LWIPOPTS_H__
-#define __LWIPOPTS_H__
+#ifndef _LWIPOPTS_EXAMPLE_COMMONH_H
+#define _LWIPOPTS_EXAMPLE_COMMONH_H
+
+#define MQTT_CERT_INC 1
+
+#ifdef MQTT_CERT_INC
+#define MEM_SIZE 8000
+#endif
 
 // Common settings used in most of the pico_w examples
 // (see https://www.nongnu.org/lwip/2_1_x/group__lwip__opts.html for details)
@@ -19,7 +25,9 @@
 #define MEM_LIBC_MALLOC             0
 #endif
 #define MEM_ALIGNMENT               4
+#ifndef MEM_SIZE
 #define MEM_SIZE                    4000
+#endif
 #define MEMP_NUM_TCP_SEG            32
 #define MEMP_NUM_ARP_QUEUE          10
 #define PBUF_POOL_SIZE              24
@@ -85,5 +93,24 @@
 #define PPP_DEBUG                   LWIP_DBG_OFF
 #define SLIP_DEBUG                  LWIP_DBG_OFF
 #define DHCP_DEBUG                  LWIP_DBG_OFF
+
+#define MEMP_NUM_SYS_TIMEOUT        (LWIP_NUM_SYS_TIMEOUT_INTERNAL+1)
+
+#ifdef MQTT_CERT_INC
+#define LWIP_ALTCP               0
+#define LWIP_ALTCP_TLS           0
+#define LWIP_ALTCP_TLS_MBEDTLS   0
+#ifndef NDEBUG
+#define ALTCP_MBEDTLS_DEBUG  LWIP_DBG_ON
+#endif
+/* TCP WND must be at least 16 kb to match TLS record size
+   or you will get a warning "altcp_tls: TCP_WND is smaller than the RX decrypion buffer, connection RX might stall!" */
+#undef TCP_WND
+#define TCP_WND  16384
+#endif // MQTT_CERT_INC
+
+// This defaults to 4
+#define MQTT_REQ_MAX_IN_FLIGHT 5
+#define MQTT_OUTPUT_RINGBUF_SIZE 2048
 
 #endif /* __LWIPOPTS_H__ */

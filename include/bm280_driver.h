@@ -100,6 +100,17 @@
 #define BM280_SET_STANDBY_MS(ms)            (((ms) & 0x07) << 5)    // Use together with BM280_READ_INTERVALS_MS
 #define BM280_SET_IIR_FILTER(fc)            (((fc) & 0x07) << 2)    // Use together with BM280_SET_FILTER_XXX
 
+// JSON HEADLINE DEFINES
+#define BM280_JSON_TEMP_KEY                 "temperature"
+#define BM280_JSON_PRESS_KEY                "pressure"
+#define BM280_JSON_HUM_KEY                  "humidity"
+#define BM280_JSON_KEYS                     {BM280_JSON_TEMP_KEY, BM280_JSON_HUM_KEY, BM280_JSON_PRESS_KEY}
+#define BM280_JSON_KEYS_LEN                 20
+#define BM280_JSON_KEYS_SIZE                3
+#define BM280_JSON_VALS_LEN                 10
+#define BM280_JSON_STR_MAX_LEN              ((BM280_JSON_KEYS_LEN + BM280_JSON_VALS_LEN + 5) * BM280_JSON_KEYS_SIZE)
+#define BM280_JSON_BUF_SIZE                 64
+
 // Handle for bm280 driver
 typedef struct bm280_handle_internal *bm280_handle_t;
 
@@ -135,16 +146,6 @@ PICO_W_RETURN_STATUS bm280_init(bm280_handle_t *handle, const uint8_t device_add
 */
 PICO_W_RETURN_STATUS bm280_read_data(bm280_handle_t handle);
 
-int32_t get_temperature(bm280_handle_t handle) {
-    return handle->temperature;
-}
-
-uint32_t get_pressure(bm280_handle_t handle) {
-    return handle->pressure;
-}
-
-uint32_t get_humidity(bm280_handle_t handle) {
-    return handle->humidity;
-}
+const char* BM280_get_json(bm280_handle_t handle);
 
 #endif
