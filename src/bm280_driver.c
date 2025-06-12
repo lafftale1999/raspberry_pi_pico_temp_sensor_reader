@@ -258,7 +258,7 @@ PICO_W_RETURN_STATUS bm280_read_data(bm280_handle_t handle) {
     parse_json(handle);
 
     printf("Temp: %0.1fC | Humidity: %0.1f%% | Pressure: %0.1fhPa\n", (float)handle->temperature / 100.0f, (float)handle->humidity / 1024.0f, ((float)handle->pressure / 256.0f) / 100.0f);
-
+ 
     return PICO_W_OK;
 }
 

@@ -1,5 +1,8 @@
 #include "pico_mqtt.h"
 #include "pico_credentials.h"
+#include "../certs/ca_cert.h"
+#include "../certs/client_cert.h"
+#include "../certs/client_key.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -202,15 +205,30 @@ int MQTT_open(MQTT_client_handle_t *handle) {
     // Configure the client for tls
     #if LWIP_ALTCP && LWIP_ALTCP_TLS
     #ifdef MQTT_CERT_INC
-        static const uint8_t ca_cert[] = CA_CERT;
-        static const uint8_t client_key[] = CLIENT_KEY;
-        static const uint8_t client_cert[] = CLIENT_CERT;
+        /* static const char ca_cert[] = CA_CERT;
+        static const char client_cert[] = CLIENT_CERT;
+        static const char client_key[] = CLIENT_KEY; */
+
+        printf("CERT LEN: %u\n", (unsigned int)ca_cert_len);
+        printf("CERT BEGIN: %.30s...\n", ca_cert);
+
+        printf("Try parse: %.60s...\n", ca_cert);
+
 
         temp_handle->mqtt_client_info.tls_config = altcp_tls_create_config_client_2wayauth(
-            ca_cert, sizeof(ca_cert), client_key, 
-            sizeof(client_key), CLIENT_KEY_PASS, CLIENT_KEY_PASS_LEN,
-            client_cert, sizeof(client_cert));
-        
+            (const u8_t *)ca_cert, ca_cert_len,
+            (const u8_t *)client_key, client_key_len,
+            CLIENT_KEY_PASS, CLIENT_KEY_PASS_LEN,
+            (const u8_t *)client_cert, client_cert_len
+        );
+
+
+        if (temp_handle->mqtt_client_info.tls_config == NULL) {
+            printf("TLS config creation failed!\n");
+        } else {
+            printf("TLS config OK\n");
+        }
+
     #if ALTCP_MBEDTLS_AUTHMODE != MBEDTLS_SSL_VERIFY_REQUIRED
         printf("Warning: tls without verification is insecure\n");
     #endif
@@ -296,8 +314,6 @@ int MQTT_poll(MQTT_client_handle_t handle) {
         printf("MQTT client not connected\n");
         return 1;
     }
-
-    // Kan lägga mer logik här senare (ex. för keepalive)
 
     return 0;
 }

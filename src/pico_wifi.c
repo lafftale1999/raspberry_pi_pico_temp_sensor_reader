@@ -1,4 +1,5 @@
 #include "../include/pico_wifi.h"
+#include "../include/pico_credentials.h"
 
 PICO_W_RETURN_STATUS wifi_init() {
     // Initialise the Wi-Fi chip
