@@ -1,7 +1,7 @@
 #ifndef PICO_W_MQTT_H
 #define PICO_W_MQTT_H
 
-#define MQTT_SERVER         "172.20.10.2"
+#define MQTT_SERVER         "192.168.61.111"
 
 #define MQTT_TOPIC_LEN      100
 #define MQTT_KEEP_ALIVE_S   60
@@ -9,8 +9,8 @@
 #define CLIENT_KEY_PASS     NULL
 #define CLIENT_KEY_PASS_LEN 0
 
-#define MQTT_TLS_PORT       9001
-#define MQTT_PORT           1883
+#define MQTT_TLS_PORT       8883
+#define MQTT_PORT           8883
 
 // PUBLISH SETTINGS
 

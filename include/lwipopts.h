@@ -10,6 +10,11 @@
 // Common settings used in most of the pico_w examples
 // (see https://www.nongnu.org/lwip/2_1_x/group__lwip__opts.html for details)
 
+#include <stdio.h>
+
+#define LWIP_PLATFORM_DIAG(x) do { printf x; } while(0)
+#define LWIP_PLATFORM_ASSERT(x) do { printf("ASSERT FAILED: %s\n", x); while(1); } while(0)
+
 // allow override in some examples
 #ifndef NO_SYS
 #define NO_SYS                      1
@@ -59,11 +64,9 @@
 #define DHCP_DOES_ARP_CHECK         0
 #define LWIP_DHCP_DOES_ACD_CHECK    0
 
-#ifndef NDEBUG
 #define LWIP_DEBUG                  1
 #define LWIP_STATS                  1
 #define LWIP_STATS_DISPLAY          1
-#endif
 
 #define ETHARP_DEBUG                LWIP_DBG_OFF
 #define NETIF_DEBUG                 LWIP_DBG_OFF
@@ -97,12 +100,12 @@
 #define MEMP_NUM_SYS_TIMEOUT        (LWIP_NUM_SYS_TIMEOUT_INTERNAL+1)
 
 #ifdef MQTT_CERT_INC
-#define LWIP_ALTCP               0
-#define LWIP_ALTCP_TLS           0
-#define LWIP_ALTCP_TLS_MBEDTLS   0
-#ifndef NDEBUG
+#define LWIP_ALTCP               1
+#define LWIP_ALTCP_TLS           1
+#define LWIP_ALTCP_TLS_MBEDTLS   1
+#define ALTCP_MBEDTLS 1
+
 #define ALTCP_MBEDTLS_DEBUG  LWIP_DBG_ON
-#endif
 /* TCP WND must be at least 16 kb to match TLS record size
    or you will get a warning "altcp_tls: TCP_WND is smaller than the RX decrypion buffer, connection RX might stall!" */
 #undef TCP_WND
