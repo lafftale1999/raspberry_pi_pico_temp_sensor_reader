@@ -30,6 +30,8 @@ include(pico_sdk_import.cmake)
 
 project(raspberry_pico_w_bme280_i2c C CXX ASM)
 
+set(PICO_USE_MBEDTLS ON)
+
 # Initialise the Raspberry Pi Pico SDK
 pico_sdk_init()
 
@@ -46,14 +48,26 @@ pico_set_program_version(raspberry_pico_w_bme280_i2c "0.1")
 pico_enable_stdio_uart(raspberry_pico_w_bme280_i2c 0)
 pico_enable_stdio_usb(raspberry_pico_w_bme280_i2c 1)
 
+# Lägg till mbedtls och stäng av plattformsberoende entropi
+add_subdirectory(${PICO_SDK_PATH}/lib/mbedtls ${CMAKE_BINARY_DIR}/mbedtls EXCLUDE_FROM_ALL)
+target_compile_definitions(mbedcrypto PRIVATE MBEDTLS_NO_PLATFORM_ENTROPY)
+target_compile_definitions(raspberry_pico_w_bme280_i2c PRIVATE MBEDTLS_NO_PLATFORM_ENTROPY)
+
 # Add the standard library to the build
 target_link_libraries(raspberry_pico_w_bme280_i2c
-        pico_stdlib)
+        pico_stdlib
+        hardware_i2c
+        pico_cyw43_arch_lwip_threadsafe_background
+        pico_lwip_mqtt
+        pico_lwip_mbedtls
+        pico_mbedtls
+        )
 
 # Add the standard include files to the build
 target_include_directories(raspberry_pico_w_bme280_i2c PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
         ${CMAKE_CURRENT_LIST_DIR}/include
+        ${PICO_SDK_PATH}/lib/mbedtls/include
 )
 
 # Add any user requested libraries

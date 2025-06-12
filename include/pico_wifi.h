@@ -5,9 +5,6 @@
 
 #include "config.h"
 
-#define WIFI_SSID "YourWifi"
-#define WIFI_PASS "YourPassword"
-
 PICO_W_RETURN_STATUS wifi_init();
 
 #endif

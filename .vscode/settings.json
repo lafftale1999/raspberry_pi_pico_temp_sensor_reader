@@ -44,6 +44,10 @@
         "i2c.h": "c",
         "gpio.h": "c",
         "pico_wifi.h": "c",
-        "bm280_driver.h": "c"
+        "bm280_driver.h": "c",
+        "cyw43_arch.h": "c",
+        "format": "c",
+        "compare": "c",
+        "cstdlib": "c"
     }
 }
