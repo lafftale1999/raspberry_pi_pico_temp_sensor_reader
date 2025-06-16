@@ -1,4 +1,8 @@
-#include "../include/bm280_driver.h"
+#include "../include/bm280_driver/bm280.h"
+#include "../include/bm280_driver/include/bm280_json.h"
+#include "../include/bm280_driver/include/bm280_registers.h"
+#include "../include/bm280_driver/include/bm280_settings.h"
+
 #include "../include/i2c_pico.h"
 
 #include <stdio.h>

@@ -4,6 +4,7 @@
  * @file:       bm280_json.h
  * @author:     Carl Broman <carl.broman@yh.nackademin.se
  * @brief:  Json headerfile for correctly parsing bm280 values
+ * @note This should not be included directly - it is included through bm280.h
  * @addtogroup bm280_json BM280_JSON
  * @{
  * @brief Headerfile for defines regarding parsing BM280 values into JSON strings.

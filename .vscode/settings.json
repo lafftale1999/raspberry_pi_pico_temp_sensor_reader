@@ -49,6 +49,10 @@
         "format": "c",
         "compare": "c",
         "cstdlib": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "random": "cpp",
+        "bm280.h": "c",
+        "i2c_pico.h": "c",
+        "bm280_json.h": "c"
     }
 }

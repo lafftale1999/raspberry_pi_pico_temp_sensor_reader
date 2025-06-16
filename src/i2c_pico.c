@@ -1,9 +1,8 @@
 #include "pico/stdio.h"
 #include <stdio.h>
 #include "include/i2c_pico.h"
-#include "include/config.h"
 
-PICO_W_RETURN_STATUS _i2c_init() {
+PICO_W_RETURN_STATUS i2c_open() {
     i2c_init(I2C_PORT, I2C_FREQUENCY);
     gpio_set_function(I2C_SDA_PIN, GPIO_FUNC_I2C);
     gpio_set_function(I2C_SCL_PIN, GPIO_FUNC_I2C);
@@ -32,7 +31,7 @@ PICO_W_RETURN_STATUS i2c_read_data(const uint8_t *device_address, const uint8_t 
         return PICO_W_FAIL;
     }
 
-    // The BM280s data registers are autoincrementing - so start reading from a certain address ex 0xF7 (pressure MSB) -> 0xFE (humidity LSB).
+    // Read for the size_t buf_size
     err = i2c_read_blocking(I2C_PORT, *device_address, buf, buf_size, false);
     if (err == PICO_ERROR_GENERIC) {
         printf("read_data() | Unable to read from i2c buss");
