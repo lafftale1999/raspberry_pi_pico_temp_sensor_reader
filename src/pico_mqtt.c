@@ -205,9 +205,6 @@ int MQTT_open(MQTT_client_handle_t *handle) {
     // Configure the client for tls
     #if LWIP_ALTCP && LWIP_ALTCP_TLS
     #ifdef MQTT_CERT_INC
-        /* static const char ca_cert[] = CA_CERT;
-        static const char client_cert[] = CLIENT_CERT;
-        static const char client_key[] = CLIENT_KEY; */
 
         printf("CERT LEN: %u\n", (unsigned int)ca_cert_len);
         printf("CERT BEGIN: %.30s...\n", ca_cert);

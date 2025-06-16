@@ -3,7 +3,7 @@
 
 #include "pico/cyw43_arch.h"
 
-#include "config.h"
+#include "pico_error.h"
 
 PICO_W_RETURN_STATUS wifi_init();
 

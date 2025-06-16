@@ -3,7 +3,7 @@
 
 #include "hardware/i2c.h"
 #include "hardware/gpio.h"
-#include "config.h"
+#include "pico_error.h"
 
 #define I2C_SDA_PIN                 14              // GPIO
 #define I2C_SCL_PIN                 15              // GPIO 

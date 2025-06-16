@@ -57,7 +57,7 @@ struct bm280_handle_internal{
     } cal_val;
 };
 
-static int parse_json(bm280_handle_t handle) {
+static int bm280_parse_json(bm280_handle_t handle) {
     json_parsed = true;
     const char* keys[BM280_JSON_KEYS_LEN] = BM280_JSON_KEYS;
     char buf[BM280_JSON_BUF_SIZE];

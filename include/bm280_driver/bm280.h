@@ -1,7 +1,77 @@
+/**
+ * Copyright (C) 2025 Carl Broman
+ *
+ * @file:       bm280_driver.h
+ * @author:     Carl Broman <carl.broman@yh.nackademin.se>
+ * @brief:  The complete driver for the BM280 sensor. Measuring temperature, pressure and humidity.
+ * @addtogroup bm280_driver BM280_driver
+ * @{
+ * @brief Driver for the bm280 sensor.
+ * @details This is a complete driver for the bm280 sensor based on the i2c communication protocol. 
+ * The driver has a JSON-parser incorporated to be able to send its sensor-data in a unified way.
+ *
+ * Example usage:
+ * @code
+ *   bm280_init(bm280_handle_t *handle, const uint8_t device_address, const BM280_READING_INTERVALS_MS interval);
+ *   bm280_read_data(bm280_handle_t *handle);
+ * @endcode
+ -------------------------------------------------------------------------------------------------*/
+
+#ifndef BM280_DRIVER_H_
+#define BM280_DRIVER_H_
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/* Includes --------------------------------------------------------------------------------------*/
+
+#include <stdlib.h>
+#include <stdio.h>
+
+#include "pico/stdio.h"
+#include "pico/stdlib.h"
+
+#include "pico_error.h"
+#include "bm280_config.h"
+
+/* Exported defines ------------------------------------------------------------------------------*/
+/** @addtogroup template_exported_defines Exported defines
+ *  @{ */
+/** @} template_exported_defines */
+
+/* Exported macros -------------------------------------------------------------------------------*/
+/** @addtogroup template_exported_macros Exported macros
+ *  @{ */
+/** @} template_exported_macros */
+
+/* Exported type definitions ---------------------------------------------------------------------*/
+/** @addtogroup template_exported_typedefs Exported type definitions
+ *  @{ */
+/** @} template_exported_typedefs */
+
+/* Exported function prototypes ------------------------------------------------------------------*/
+/** @addtogroup template_exported_functions Exported functions
+ *  @{ */
+void template_init(void);
+/** @} template_exported_functions */
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif  // SRC_TEMPLATE_TEMPLATE_H_
+/** @} template */
+
+
+
+// ------------------------------------------------
+
+
 #ifndef BM280_DRIVER_H
 #define BM280_DRIVER_H
 
-#include "config.h"
+#include "pico_error.h"
 #include <stdlib.h>
 #include "pico/stdlib.h"
 #include <stdio.h>
@@ -55,61 +125,29 @@
 // *********** REGISTERS ***********
 // *********************************
 // READ ID
-#define BM280_ID_REG                        0xD0                // BM280 chip id is 0x60
+// CHECK
 
 // RESET
-#define BM280_RESET_REGISTER                0xE0                // Register for reset.
-#define BM280_WRITE_RESET_BITS              0xB6                // The device is reset using the complete power-on-reset procedure. Must be written to BM280_RESET_REGISTER
+// CHECK
 
 // HUMIDITY
-#define BM280_CONTROL_HUMIDITY              0xF2                // Controls the oversampling of humidity data. 
-#define BM280_SET_HUM_OSRS(osrs_h)          ((osrs_h) & 0x07)   // use together with BM280_OSRS_XXX            
+         
 
 /* TEMPERATURE & PRESSURE
     BM280_SET_TEMP_OSRS(BM280_OSRS_XN) to set temperature OSRS
     BM280_SET_PRESS_OSRS(BM280_OSRS_XN) to set pressure OSRS
     BM280_SET_MODE(BM280_MODE_XXX) to set reader mode.
 */
-#define BM280_CONTROL_MEASURE               0xF4                        // register for setting the temp and press OSRS, and setting the reader mode
-#define BM280_SET_TEMP_OSRS(osrs_t)         (((osrs_t) & 0x07) << 5)    // use together with BM280_OSRS_XXX
-#define BM280_SET_PRESS_OSRS(osrs_p)        (((osrs_p) & 0x07) << 2)    // use together with BM280_OSRS_XXX
-
-#define BM280_MODE_NORMAL                   0b11                // Argument for BM280_SET_MODE | perpetual cycling of measurements and inactive periods.
-#define BM280_MODE_SLEEP                    0b00                // Argument for BM280_SET_MODE | no operation, all registers accessible, lowest power, selected after startup
-#define BM280_MODE_FORCED                   0b01                // Argument for BM280_SET_MODE | perform one measurement, store results and return to sleep mode
-#define BM280_SET_MODE(mode)                ((mode) & 0x03)     // Use BM280_MODE_XXX to set specified mode accepted by BM280
+//CHECKK
 
 /* all data registers for reading values*/
-
-#define BM280_HUMIDITY_REG_MSB              0xFD
-#define BM280_HUMIDITY_REG_LSB              0xFE 
-
-#define BM280_PRESS_REG_MSB                 0xF7
-#define BM280_PRESS_REG_LSB                 0xF8
-#define BM280_PRESS_REG_XLSB                0xF9
-
-#define BM280_TEMP_REG_MSB                  0xFA
-#define BM280_TEMP_REG_LSB                  0xFB
-#define BM280_TEMP_REG_XLSB                 0xFC
-
-#define BM280_READ_VALUES_REG_START         0xF7
-#define BM280_READ_VALUES_REG_LEN           8
+// CHECK
 
 // CONFIGURATION FOR BM280
-#define BM280_CONFIG_REGISTER               0xF5
-#define BM280_SET_STANDBY_MS(ms)            (((ms) & 0x07) << 5)    // Use together with BM280_READ_INTERVALS_MS
-#define BM280_SET_IIR_FILTER(fc)            (((fc) & 0x07) << 2)    // Use together with BM280_SET_FILTER_XXX
+
 
 // JSON HEADLINE DEFINES
-#define BM280_JSON_TEMP_KEY                 "temperature"
-#define BM280_JSON_PRESS_KEY                "pressure"
-#define BM280_JSON_HUM_KEY                  "humidity"
-#define BM280_JSON_KEYS                     {BM280_JSON_TEMP_KEY, BM280_JSON_HUM_KEY, BM280_JSON_PRESS_KEY}
-#define BM280_JSON_KEYS_LEN                 20
-#define BM280_JSON_KEYS_SIZE                3
-#define BM280_JSON_VALS_LEN                 10
-#define BM280_JSON_STR_MAX_LEN              ((BM280_JSON_KEYS_LEN + BM280_JSON_VALS_LEN + 5) * BM280_JSON_KEYS_SIZE)
-#define BM280_JSON_BUF_SIZE                 64
+// CHECKED
 
 // Handle for bm280 driver
 typedef struct bm280_handle_internal *bm280_handle_t;
