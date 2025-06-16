@@ -209,17 +209,17 @@ int MQTT_open(MQTT_client_handle_t *handle) {
         static const char client_cert[] = CLIENT_CERT;
         static const char client_key[] = CLIENT_KEY; */
 
-        printf("CERT LEN: %u\n", (unsigned int)ca_cert_len);
+        printf("CERT LEN: %u\n", (unsigned int)sizeof(ca_cert));
         printf("CERT BEGIN: %.30s...\n", ca_cert);
 
         printf("Try parse: %.60s...\n", ca_cert);
 
 
         temp_handle->mqtt_client_info.tls_config = altcp_tls_create_config_client_2wayauth(
-            (const u8_t *)ca_cert, ca_cert_len,
-            (const u8_t *)client_key, client_key_len,
+            (const u8_t *)ca_cert, sizeof(ca_cert),
+            (const u8_t *)client_key, sizeof(client_key),
             CLIENT_KEY_PASS, CLIENT_KEY_PASS_LEN,
-            (const u8_t *)client_cert, client_cert_len
+            (const u8_t *)client_cert, sizeof(client_cert)
         );
 
 

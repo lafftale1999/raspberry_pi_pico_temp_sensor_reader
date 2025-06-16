@@ -3,7 +3,7 @@
 #include "include/i2c_pico.h"
 #include "include/config.h"
 
-PICO_W_RETURN_STATUS _i2c_init() {
+PICO_W_RETURN_STATUS i2c_open() {
     i2c_init(I2C_PORT, I2C_FREQUENCY);
     gpio_set_function(I2C_SDA_PIN, GPIO_FUNC_I2C);
     gpio_set_function(I2C_SCL_PIN, GPIO_FUNC_I2C);

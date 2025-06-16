@@ -48,6 +48,7 @@
         "cyw43_arch.h": "c",
         "format": "c",
         "compare": "c",
-        "cstdlib": "c"
+        "cstdlib": "c",
+        "i2c_pico.h": "c"
     }
 }
