@@ -1,5 +1,5 @@
 #include "../include/bm280_driver.h"
-#include "../include/i2c_internal.h"
+#include "../include/i2c_pico.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -57,7 +57,7 @@ struct bm280_handle_internal{
     } cal_val;
 };
 
-int parse_json(bm280_handle_t handle) {
+static int parse_json(bm280_handle_t handle) {
     json_parsed = true;
     const char* keys[BM280_JSON_KEYS_LEN] = BM280_JSON_KEYS;
     char buf[BM280_JSON_BUF_SIZE];
@@ -94,14 +94,14 @@ Calibration needed for converting the measurement values from the BM280.
     
     \return PICO_W_OK parameters set. PICO_W_FAIL failed to set parameters.
 */
-PICO_W_RETURN_STATUS bm280_calibration(bm280_handle_t handle) {
+static PICO_W_RETURN_STATUS bm280_calibration(bm280_handle_t handle) {
     
     uint8_t buf[BM280_AMOUNT_CALIB_PARAMS] = {0};
     
     uint8_t t_p_param_start = BM280_TEMP_CALIB_PARAM_START;
     // read temperature and pressure calibration values
     
-    if (read_data(&handle->i2c_address, &t_p_param_start, buf, BM280_TEMP_PARAMS_LEN + BM280_PRESS_PARAMS_LEN) != PICO_W_OK) {
+    if (i2c_read_data(&handle->i2c_address, &t_p_param_start, buf, BM280_TEMP_PARAMS_LEN + BM280_PRESS_PARAMS_LEN) != PICO_W_OK) {
         printf("Unable to read temperature and pressure calibration values\n");
         return PICO_W_FAIL;
     }
@@ -112,8 +112,8 @@ PICO_W_RETURN_STATUS bm280_calibration(bm280_handle_t handle) {
     };
 
     // read humidity calibration values
-    if (read_data(&handle->i2c_address, &hum_param[0], &buf[24], BM280_HUM_CALIB_FIRST_LEN) != PICO_W_OK ||
-        read_data(&handle->i2c_address, &hum_param[1], &buf[25], BM280_HUM_CALIB_CONTINUE_LEN) != PICO_W_OK) {
+    if (i2c_read_data(&handle->i2c_address, &hum_param[0], &buf[24], BM280_HUM_CALIB_FIRST_LEN) != PICO_W_OK ||
+        i2c_read_data(&handle->i2c_address, &hum_param[1], &buf[25], BM280_HUM_CALIB_CONTINUE_LEN) != PICO_W_OK) {
         printf("Unable to read humidity calibration values\n");
         return PICO_W_FAIL;
     }
@@ -150,7 +150,7 @@ PICO_W_RETURN_STATUS bm280_calibration(bm280_handle_t handle) {
     Function provided by Bosch Sensortec in documentation for converting sensorvalues
     https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bme280-ds002.pdf
 */
-PICO_W_RETURN_STATUS bm280_convert_pressure(bm280_handle_t handle) {
+static PICO_W_RETURN_STATUS bm280_convert_pressure(bm280_handle_t handle) {
     int64_t var1, var2, temp_pressure;
     
     var1 = ((int64_t)handle->t_fine) - 128000;
@@ -180,7 +180,7 @@ PICO_W_RETURN_STATUS bm280_convert_pressure(bm280_handle_t handle) {
     Function provided by Bosch Sensortec in documentation for converting sensorvalues
     https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bme280-ds002.pdf 
 */
-PICO_W_RETURN_STATUS bm280_convert_temperature(bm280_handle_t handle) {
+static PICO_W_RETURN_STATUS bm280_convert_temperature(bm280_handle_t handle) {
     int32_t var1, var2;
 
     var1 = ((((handle->temp_raw >> 3) - ((int32_t)handle->cal_val.temp.dig_t1 << 1))) * ((int32_t)handle->cal_val.temp.dig_t2)) >> 11;
@@ -196,7 +196,7 @@ PICO_W_RETURN_STATUS bm280_convert_temperature(bm280_handle_t handle) {
     Function provided by Bosch Sensortec in documentation for converting sensorvalues
     https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bme280-ds002.pdf 
 */
-PICO_W_RETURN_STATUS bm280_convert_humidity(bm280_handle_t handle) {
+static PICO_W_RETURN_STATUS bm280_convert_humidity(bm280_handle_t handle) {
     int32_t v_x1;
 
     v_x1 = (handle->t_fine - ((int32_t)76800));
@@ -218,7 +218,7 @@ PICO_W_RETURN_STATUS bm280_convert_humidity(bm280_handle_t handle) {
 
     \return PICO_W_OK measurements converted. PICO_W_FAIL measurements failed to convert.
 */
-PICO_W_RETURN_STATUS bm280_convert_measurements(bm280_handle_t handle) {
+static PICO_W_RETURN_STATUS bm280_convert_measurements(bm280_handle_t handle) {
     if (bm280_convert_temperature(handle) != PICO_W_OK) {
         printf("Unable to convert temperature\n");
         return PICO_W_FAIL;
@@ -242,7 +242,7 @@ PICO_W_RETURN_STATUS bm280_read_data(bm280_handle_t handle) {
     uint8_t buf[BM280_READ_VALUES_REG_LEN];
     uint8_t register_start = BM280_READ_VALUES_REG_START;
 
-    if(read_data(&handle->i2c_address, &register_start, buf, BM280_READ_VALUES_REG_LEN) != PICO_W_OK) {
+    if(i2c_read_data(&handle->i2c_address, &register_start, buf, BM280_READ_VALUES_REG_LEN) != PICO_W_OK) {
         printf("Unable to read data from registers.\n");
         return PICO_W_FAIL;
     }
@@ -293,9 +293,9 @@ PICO_W_RETURN_STATUS bm280_init(bm280_handle_t *handle, const uint8_t device_add
     };
 
     // Making sure that all configurations are set up correctly
-    if (write_data(&p_handle->i2c_address, humidity_set_up, 2, true) != PICO_W_OK ||
-        write_data(&p_handle->i2c_address, config_set_up, 2, true) != PICO_W_OK ||
-        write_data(&p_handle->i2c_address, measurement_set_up, 2, false) != PICO_W_OK){
+    if (i2c_write_data(&p_handle->i2c_address, humidity_set_up, 2, true) != PICO_W_OK ||
+        i2c_write_data(&p_handle->i2c_address, config_set_up, 2, true) != PICO_W_OK ||
+        i2c_write_data(&p_handle->i2c_address, measurement_set_up, 2, false) != PICO_W_OK){
         printf("Unable to correctly set up configurations on bm280.\n");
         goto exit;
     }
