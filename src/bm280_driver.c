@@ -2,7 +2,6 @@
 #include "../include/bm280_driver/include/bm280_json.h"
 #include "../include/bm280_driver/include/bm280_registers.h"
 #include "../include/bm280_driver/include/bm280_settings.h"
-
 #include "../include/i2c_pico.h"
 
 #include <stdio.h>
@@ -61,6 +60,12 @@ struct bm280_handle_internal{
     } cal_val;
 };
 
+/**
+ * @brief Parses the current sensor readings into a JSON-formatted string.
+ *
+ * @param handle Handle to the BM280 device.
+ * @return Always returns 0. Updates internal `json_string` in handle.
+ */
 static int bm280_parse_json(bm280_handle_t handle) {
     json_parsed = true;
     const char* keys[BM280_JSON_KEYS_LEN] = BM280_JSON_KEYS;
@@ -91,13 +96,12 @@ static int bm280_parse_json(bm280_handle_t handle) {
     return 0;
 }
 
-/*!
-Calibration needed for converting the measurement values from the BM280.
-
-    \param handle handle for the bm280 device. Used to manipulate the cal_val.
-    
-    \return PICO_W_OK parameters set. PICO_W_FAIL failed to set parameters.
-*/
+/**
+ * @brief Reads and sets calibration parameters from the sensor.
+ *
+ * @param handle BM280 device handle.
+ * @return PICO_W_OK on success, PICO_W_FAIL on failure.
+ */
 static PICO_W_RETURN_STATUS bm280_calibration(bm280_handle_t handle) {
     
     uint8_t buf[BM280_AMOUNT_CALIB_PARAMS] = {0};
@@ -150,10 +154,14 @@ static PICO_W_RETURN_STATUS bm280_calibration(bm280_handle_t handle) {
     return PICO_W_OK;
 }
 
-/*
-    Function provided by Bosch Sensortec in documentation for converting sensorvalues
-    https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bme280-ds002.pdf
-*/
+/**
+ * @brief Converts the raw pressure value to readable format using calibration parameters.
+ * @details Function provided by Bosch Sensortec in documentation for converting sensorvalues
+ * https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bme280-ds002.pdf
+ * 
+ * @param handle BM280 device handle.
+ * @return PICO_W_OK on success, PICO_W_FAIL if division by zero occurs.
+ */
 static PICO_W_RETURN_STATUS bm280_convert_pressure(bm280_handle_t handle) {
     int64_t var1, var2, temp_pressure;
     
@@ -180,10 +188,14 @@ static PICO_W_RETURN_STATUS bm280_convert_pressure(bm280_handle_t handle) {
     return PICO_W_OK;
 }
 
-/*
-    Function provided by Bosch Sensortec in documentation for converting sensorvalues
-    https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bme280-ds002.pdf 
-*/
+/**
+ * @brief Converts the raw temperature value to readable format and calculates t_fine.
+ * @details Function provided by Bosch Sensortec in documentation for converting sensorvalues
+ * https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bme280-ds002.pdf 
+ * 
+ * @param handle BM280 device handle.
+ * @return PICO_W_OK on success.
+ */
 static PICO_W_RETURN_STATUS bm280_convert_temperature(bm280_handle_t handle) {
     int32_t var1, var2;
 
@@ -196,10 +208,14 @@ static PICO_W_RETURN_STATUS bm280_convert_temperature(bm280_handle_t handle) {
     return PICO_W_OK;
 }
 
-/*
-    Function provided by Bosch Sensortec in documentation for converting sensorvalues
-    https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bme280-ds002.pdf 
-*/
+/**
+ * @brief Converts the raw humidity value to readable format using calibration data.
+ * @details Function provided by Bosch Sensortec in documentation for converting sensorvalues
+ * https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bme280-ds002.pdf 
+ *
+ * @param handle BM280 device handle.
+ * @return PICO_W_OK on success.
+ */
 static PICO_W_RETURN_STATUS bm280_convert_humidity(bm280_handle_t handle) {
     int32_t v_x1;
 
@@ -215,13 +231,13 @@ static PICO_W_RETURN_STATUS bm280_convert_humidity(bm280_handle_t handle) {
     return PICO_W_OK;
 }
 
-/*!
-    Converts the measurements fetched from the BM280. Important to convert them in the set order, otherwhise you will get unexpected results.
 
-    \param handle device handle to convert measurements from.
-
-    \return PICO_W_OK measurements converted. PICO_W_FAIL measurements failed to convert.
-*/
+/**
+ * @brief Converts all raw sensor values (temperature, pressure, humidity).
+ *
+ * @param handle BM280 device handle.
+ * @return PICO_W_OK if all conversions succeed, otherwise PICO_W_FAIL.
+ */
 static PICO_W_RETURN_STATUS bm280_convert_measurements(bm280_handle_t handle) {
     if (bm280_convert_temperature(handle) != PICO_W_OK) {
         printf("Unable to convert temperature\n");

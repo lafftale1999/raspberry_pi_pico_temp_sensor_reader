@@ -1,5 +1,5 @@
     #include "include/i2c_pico.h"
-    #include "include/bm280_driver/bm280_driver.h"
+    #include "include/bm280_driver/bm280.h"
     #include "include/pico_wifi.h"
     #include "include/pico_mqtt.h"
     #include "pico/time.h"
@@ -17,7 +17,7 @@
         if (i2c_open() == PICO_W_OK) {
             printf("i2c init succesful!\n");
         }
-
+        
         bm280_handle_t bm280_handle = NULL;
         if (bm280_init(&bm280_handle, 0x76, INTERVAL_1000MS) == PICO_W_OK) {
             printf("device succesfully init\n");

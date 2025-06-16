@@ -80,31 +80,27 @@ typedef enum {
  */
 
 /**
- * @brief Initializes the BM280.
- * @details Allocates memory, reads calibration data, and sets default configuration.
- *
- * @param handle Pointer to store the created handle.
- * @param device_address I2C address of the device.
- * @param interval Predefined measurement interval (BM280_READING_INTERVALS_MS).
- * @return PICO_W_OK on success, PICO_W_FAIL on failure.
+ * @brief Initialize the BM280 sensor.
+ * @param handle Pointer to store the handle.
+ * @param device_address I2C address.
+ * @param interval Measurement standby interval.
+ * @return PICO_W_OK if successful, otherwise PICO_W_FAIL.
  */
 PICO_W_RETURN_STATUS bm280_init(bm280_handle_t *handle, const uint8_t device_address, const BM280_READING_INTERVALS_MS interval);
 
 /**
- * @brief Reads sensor data from the BM280.
- *
+ * @brief Read temperature, pressure, and humidity from the BM280.
  * @param handle Handle to the BM280 instance.
- * @return PICO_W_OK if data was read successfully, otherwise PICO_W_FAIL.
+ * @return PICO_W_OK if successful, otherwise PICO_W_FAIL.
  */
 PICO_W_RETURN_STATUS bm280_read_data(bm280_handle_t handle);
 
 /**
- * @brief Returns the latest sensor values as a JSON string.
- *
+ * @brief Get latest measurement as a JSON string.
  * @param handle Handle to the BM280 instance.
- * @return Pointer to a JSON-formatted string.
+ * @return Pointer to JSON string, or NULL if not available.
  */
-const char* bm280_get_json(bm280_handle_t handle);
+const char* BM280_get_json(bm280_handle_t handle);
 
 /** @} */ // End of bm280_functions
 
