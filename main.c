@@ -1,12 +1,12 @@
     #include "include/i2c_pico.h"
-    #include "include/bm280_driver/bm280.h"
+    #include "bm280_driver/bm280.h"
     #include "include/pico_wifi.h"
     #include "include/pico_mqtt.h"
     #include "pico/time.h"
 
     #define WIFI_POLLING_MS 100
     #define DEVICE_POLLING_MS 5000
-    #define MQTT_PUBLISH_MS 10000
+    #define MQTT_PUBLISH_MS 30000
 
     int main()
     {
@@ -37,14 +37,14 @@
             cyw43_arch_poll();
 
             if (MQTT_poll(mqtt_handle) != 0) {
-                printf("Unable to send messages\n");
+                MQTT_LOG("Unable to send messages\n");
             }
 
             if(absolute_time_diff_us(get_absolute_time(), next_publish) <= 0) {
-                printf("Publish to topic\n");
+                MQTT_LOG("Publish to topic\n");
 
                 if (MQTT_publish(mqtt_handle, "/room_meas", BM280_get_json(bm280_handle)) != 0) {
-                    printf("Publish failed\n");
+                    MQTT_LOG("Publish failed\n");
                 }
 
                 next_publish = make_timeout_time_ms(MQTT_PUBLISH_MS);
@@ -52,12 +52,12 @@
 
             if(absolute_time_diff_us(get_absolute_time(), next_device_poll) <= 0) {
                 if (bm280_read_data(bm280_handle) != PICO_W_OK) {
-                    printf("Failed to read data from BM280\n");
+                    BM280_LOG("Failed to read data from BM280\n");
                 }
 
                 next_device_poll = make_timeout_time_ms(DEVICE_POLLING_MS);
             }
 
-            cyw43_arch_wait_for_work_until(make_timeout_time_ms(100));
+            cyw43_arch_wait_for_work_until(make_timeout_time_ms(WIFI_POLLING_MS));
         }
     }

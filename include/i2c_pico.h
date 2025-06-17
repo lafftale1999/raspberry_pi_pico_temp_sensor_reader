@@ -10,9 +10,9 @@
 #define I2C_PORT                    i2c1            // Which I2C module is used for communication
 #define I2C_FREQUENCY               100000          // Frequency for communication
 
-PICO_W_RETURN_STATUS i2c_open();
-PICO_W_RETURN_STATUS i2c_write_data(const uint8_t *device_address, uint8_t *data, const size_t len, bool keepMaster);
-PICO_W_RETURN_STATUS i2c_read_data(const uint8_t *device_address, const uint8_t *d_register, uint8_t *buf, const size_t len);
-PICO_W_RETURN_STATUS scan_i2c_bus();
+int i2c_open();
+int i2c_write_data(const uint8_t *device_address, uint8_t *data, const size_t len, bool keepMaster);
+int i2c_read_data(const uint8_t *device_address, const uint8_t *d_register, uint8_t *buf, const size_t len);
+int scan_i2c_bus();
 
 #endif

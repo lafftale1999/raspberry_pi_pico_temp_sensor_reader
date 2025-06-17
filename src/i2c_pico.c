@@ -2,45 +2,46 @@
 #include <stdio.h>
 #include "include/i2c_pico.h"
 
-PICO_W_RETURN_STATUS i2c_open() {
+int i2c_open() {
     i2c_init(I2C_PORT, I2C_FREQUENCY);
     gpio_set_function(I2C_SDA_PIN, GPIO_FUNC_I2C);
     gpio_set_function(I2C_SCL_PIN, GPIO_FUNC_I2C);
     gpio_pull_up(I2C_SDA_PIN);
     gpio_pull_up(I2C_SCL_PIN);
     
-    return PICO_W_OK;
+    return 0;
 }
 
-PICO_W_RETURN_STATUS i2c_write_data(const uint8_t *device_address, uint8_t *data, const size_t len, bool keepMaster) {
+int i2c_write_data(const uint8_t *device_address, uint8_t *data, const size_t len, bool keepMaster) {
     int err = i2c_write_blocking(I2C_PORT, *device_address, data, len, keepMaster);
 
     if(err == PICO_ERROR_GENERIC) {
-        return PICO_W_FAIL;
+        return 1;
     }
 
-    return PICO_W_OK;
+    return 0;
 }
 
 
-PICO_W_RETURN_STATUS i2c_read_data(const uint8_t *device_address, const uint8_t *d_register, uint8_t *buf, const size_t buf_size) {
+int i2c_read_data(const uint8_t *device_address, const uint8_t *d_register, uint8_t *buf, const size_t buf_size) {
     // Start with a pointer to where we should start reading.
     int err = i2c_write_blocking(I2C_PORT, *device_address, d_register, 1, true);
     if (err == PICO_ERROR_GENERIC) {
         printf("read_data() | Unable to write to i2c buss");
-        return PICO_W_FAIL;
+        return 1;
     }
 
     // Read for the size_t buf_size
     err = i2c_read_blocking(I2C_PORT, *device_address, buf, buf_size, false);
     if (err == PICO_ERROR_GENERIC) {
         printf("read_data() | Unable to read from i2c buss");
+        return 1;
     }
 
-    return PICO_W_OK;
+    return 0;
 }
 
-PICO_W_RETURN_STATUS scan_i2c_bus() {
+int scan_i2c_bus() {
     printf("\nI2C Bus Scan\n");
     printf("   0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F\n");
 
@@ -70,5 +71,5 @@ PICO_W_RETURN_STATUS scan_i2c_bus() {
     }
     printf("Done.\n");
 
-    return PICO_W_OK;
+    return 0;
 }

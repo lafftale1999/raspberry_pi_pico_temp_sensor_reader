@@ -1,0 +1,68 @@
+\doxysection{internal/bm280\+\_\+settings.h File Reference}
+\hypertarget{bm280__settings_8h}{}\label{bm280__settings_8h}\index{internal/bm280\_settings.h@{internal/bm280\_settings.h}}
+
+
+\+: The different setting available for the BM280.  
+
+
+{\ttfamily \#include "{}bm280\+\_\+registers.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{group___b_m280__measurement__settings_gaeb7d34ba6af53f8137b5a6272248cf8d}{BM280\+\_\+\+SET\+\_\+\+STANDBY\+\_\+\+MS}}(ms)
+\begin{DoxyCompactList}\small\item\em Macro for setting the standby interval. This will decide for how long the BM280 will sleep between taking measurements. (Only effective in BM280\+\_\+\+MODE\+\_\+\+NORMAL) \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group___b_m280__measurement__settings_ga1e5b40201feff15f92a6f78b661b18ef}{BM280\+\_\+\+SET\+\_\+\+IIR\+\_\+\+FILTER}}(fs)
+\begin{DoxyCompactList}\small\item\em Macros to configure temperature, pressure, and humidity oversampling. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group___b_m280__oversampling__macros_ga7cffb36fa9f88ed1d2306a8a4dd4a818}{BM280\+\_\+\+SET\+\_\+\+TEMP\+\_\+\+OSRS}}(osrs\+\_\+t)
+\item 
+\#define \mbox{\hyperlink{group___b_m280__oversampling__macros_gab4486749c97c910d416be671435a4c8c}{BM280\+\_\+\+SET\+\_\+\+PRESS\+\_\+\+OSRS}}(osrs\+\_\+p)
+\item 
+\#define \mbox{\hyperlink{group___b_m280__oversampling__macros_ga641361d4f94bd93368c136f40cc9a49e}{BM280\+\_\+\+SET\+\_\+\+HUM\+\_\+\+OSRS}}(osrs\+\_\+h)
+\item 
+\#define \mbox{\hyperlink{group___b_m280__osrs_ga3444c74ed34abd50192bbe2753d40bd3}{BM280\+\_\+\+OSRS\+\_\+\+SKIPPED}}~0b000
+\item 
+\#define \mbox{\hyperlink{group___b_m280__osrs_ga1ba6448f4abec86a02b0eed8850b2f29}{BM280\+\_\+\+OSRS\+\_\+\+X1}}~0b001
+\item 
+\#define \mbox{\hyperlink{group___b_m280__osrs_ga683f743e500e9b1696e330c515b86290}{BM280\+\_\+\+OSRS\+\_\+\+X2}}~0b010
+\item 
+\#define \mbox{\hyperlink{group___b_m280__osrs_ga6e6cd9d0d1e345101f37c520fc803d86}{BM280\+\_\+\+OSRS\+\_\+\+X4}}~0b011
+\item 
+\#define \mbox{\hyperlink{group___b_m280__osrs_gaf7b7ff615002bb43fcaadb9e1f6c6b3a}{BM280\+\_\+\+OSRS\+\_\+\+X8}}~0b100
+\item 
+\#define \mbox{\hyperlink{group___b_m280__osrs_gaa8172d96dbcbf7a3925111cc8ec03cf5}{BM280\+\_\+\+OSRS\+\_\+\+X16}}~0b101
+\item 
+\#define \mbox{\hyperlink{group___b_m280__iir_ga48b4441642bc8ab92efd071050b4e442}{BM280\+\_\+\+SET\+\_\+\+FILTER\+\_\+\+OFF}}~0b000
+\item 
+\#define \mbox{\hyperlink{group___b_m280__iir_ga787aa6ca4c2eb4db25ce826537871627}{BM280\+\_\+\+SET\+\_\+\+FILTER\+\_\+2}}~0b001
+\item 
+\#define \mbox{\hyperlink{group___b_m280__iir_gad55664416458ea5d6ca49a049c794463}{BM280\+\_\+\+SET\+\_\+\+FILTER\+\_\+4}}~0b010
+\item 
+\#define \mbox{\hyperlink{group___b_m280__iir_ga20994312818afb09cb559bf864f0ef68}{BM280\+\_\+\+SET\+\_\+\+FILTER\+\_\+8}}~0b011
+\item 
+\#define \mbox{\hyperlink{group___b_m280__iir_gac03d31f86e7a705b48b3fcb75653f04f}{BM280\+\_\+\+SET\+\_\+\+FILTER\+\_\+16}}~0b100
+\item 
+\#define \mbox{\hyperlink{group___b_m280__reading__modes_ga6e2339dd97e34fbeace48c65560e93d3}{BM280\+\_\+\+SET\+\_\+\+MODE}}(mode)
+\begin{DoxyCompactList}\small\item\em Macro for setting the mode on the BM280. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group___b_m280__reading__modes_gaa9235f9b549a789bd4ee3e8fb27c3896}{BM280\+\_\+\+MODE\+\_\+\+NORMAL}}~0b11
+\item 
+\#define \mbox{\hyperlink{group___b_m280__reading__modes_ga33450e939252cfbf023b266aa1587bcc}{BM280\+\_\+\+MODE\+\_\+\+SLEEP}}~0b00
+\item 
+\#define \mbox{\hyperlink{group___b_m280__reading__modes_gac044cc8fac00898a0424a2a47ebca116}{BM280\+\_\+\+MODE\+\_\+\+FORCED}}~0b01
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\+: The different setting available for the BM280. 
+
+Copyright (C) 2025 Carl Broman
+
+\begin{DoxyAuthor}{Author}
+\+: Carl Broman \href{mailto:carl.broman@yh.nackademin.se}{\texttt{carl.\+broman@yh.\+nackademin.\+se}} 
+\end{DoxyAuthor}
+\begin{DoxyNote}{Note}
+This should not be included directly -\/ it is included through \doxylink{bm280_8h}{bm280.\+h} 
+\end{DoxyNote}
+
+
+Definition in file \mbox{\hyperlink{bm280__settings_8h_source}{bm280\+\_\+settings.\+h}}.
+

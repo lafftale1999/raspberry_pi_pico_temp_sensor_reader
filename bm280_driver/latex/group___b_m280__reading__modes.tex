@@ -1,0 +1,92 @@
+\doxysubsubsection{Reading Modes }
+\hypertarget{group___b_m280__reading__modes}{}\label{group___b_m280__reading__modes}\index{Reading Modes@{Reading Modes}}
+
+
+The different reading modes for the BM280. Coupled together with SET\+\_\+\+MODE.  
+
+
+\doxysubsubsubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{group___b_m280__reading__modes_ga6e2339dd97e34fbeace48c65560e93d3}{BM280\+\_\+\+SET\+\_\+\+MODE}}(mode)
+\begin{DoxyCompactList}\small\item\em Macro for setting the mode on the BM280. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group___b_m280__reading__modes_gaa9235f9b549a789bd4ee3e8fb27c3896}{BM280\+\_\+\+MODE\+\_\+\+NORMAL}}~0b11
+\item 
+\#define \mbox{\hyperlink{group___b_m280__reading__modes_ga33450e939252cfbf023b266aa1587bcc}{BM280\+\_\+\+MODE\+\_\+\+SLEEP}}~0b00
+\item 
+\#define \mbox{\hyperlink{group___b_m280__reading__modes_gac044cc8fac00898a0424a2a47ebca116}{BM280\+\_\+\+MODE\+\_\+\+FORCED}}~0b01
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsubsection{Detailed Description}
+The different reading modes for the BM280. Coupled together with SET\+\_\+\+MODE. 
+
+
+
+\label{doc-define-members}
+\Hypertarget{group___b_m280__reading__modes_doc-define-members}
+\doxysubsubsubsection{Macro Definition Documentation}
+\Hypertarget{group___b_m280__reading__modes_gac044cc8fac00898a0424a2a47ebca116}\index{Reading Modes@{Reading Modes}!BM280\_MODE\_FORCED@{BM280\_MODE\_FORCED}}
+\index{BM280\_MODE\_FORCED@{BM280\_MODE\_FORCED}!Reading Modes@{Reading Modes}}
+\doxysubsubsubsubsection{\texorpdfstring{BM280\_MODE\_FORCED}{BM280\_MODE\_FORCED}}
+{\footnotesize\ttfamily \label{group___b_m280__reading__modes_gac044cc8fac00898a0424a2a47ebca116} 
+\#define BM280\+\_\+\+MODE\+\_\+\+FORCED~0b01}
+
+Perform one measurement, store results and return to sleep mode 
+
+Definition at line \mbox{\hyperlink{bm280__settings_8h_source_l00166}{166}} of file \mbox{\hyperlink{bm280__settings_8h_source}{bm280\+\_\+settings.\+h}}.
+
+\Hypertarget{group___b_m280__reading__modes_gaa9235f9b549a789bd4ee3e8fb27c3896}\index{Reading Modes@{Reading Modes}!BM280\_MODE\_NORMAL@{BM280\_MODE\_NORMAL}}
+\index{BM280\_MODE\_NORMAL@{BM280\_MODE\_NORMAL}!Reading Modes@{Reading Modes}}
+\doxysubsubsubsubsection{\texorpdfstring{BM280\_MODE\_NORMAL}{BM280\_MODE\_NORMAL}}
+{\footnotesize\ttfamily \label{group___b_m280__reading__modes_gaa9235f9b549a789bd4ee3e8fb27c3896} 
+\#define BM280\+\_\+\+MODE\+\_\+\+NORMAL~0b11}
+
+Perpetual cycling of measurements and inactive periods. 
+
+Definition at line \mbox{\hyperlink{bm280__settings_8h_source_l00164}{164}} of file \mbox{\hyperlink{bm280__settings_8h_source}{bm280\+\_\+settings.\+h}}.
+
+\Hypertarget{group___b_m280__reading__modes_ga33450e939252cfbf023b266aa1587bcc}\index{Reading Modes@{Reading Modes}!BM280\_MODE\_SLEEP@{BM280\_MODE\_SLEEP}}
+\index{BM280\_MODE\_SLEEP@{BM280\_MODE\_SLEEP}!Reading Modes@{Reading Modes}}
+\doxysubsubsubsubsection{\texorpdfstring{BM280\_MODE\_SLEEP}{BM280\_MODE\_SLEEP}}
+{\footnotesize\ttfamily \label{group___b_m280__reading__modes_ga33450e939252cfbf023b266aa1587bcc} 
+\#define BM280\+\_\+\+MODE\+\_\+\+SLEEP~0b00}
+
+No operation, all registers accessible, lowest power, selected after startup 
+
+Definition at line \mbox{\hyperlink{bm280__settings_8h_source_l00165}{165}} of file \mbox{\hyperlink{bm280__settings_8h_source}{bm280\+\_\+settings.\+h}}.
+
+\Hypertarget{group___b_m280__reading__modes_ga6e2339dd97e34fbeace48c65560e93d3}\index{Reading Modes@{Reading Modes}!BM280\_SET\_MODE@{BM280\_SET\_MODE}}
+\index{BM280\_SET\_MODE@{BM280\_SET\_MODE}!Reading Modes@{Reading Modes}}
+\doxysubsubsubsubsection{\texorpdfstring{BM280\_SET\_MODE}{BM280\_SET\_MODE}}
+{\footnotesize\ttfamily \label{group___b_m280__reading__modes_ga6e2339dd97e34fbeace48c65560e93d3} 
+\#define BM280\+\_\+\+SET\+\_\+\+MODE(\begin{DoxyParamCaption}\item[{}]{mode}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(((mode)\ \&\ 0x03)\ |\ \mbox{\hyperlink{group___b_m280__registers__configurations_gad784b123a337bc47f10f95b2fe23c1fd}{BM280\_CONTROL\_MEASURE}})}
+
+\end{DoxyCode}
+
+
+Macro for setting the mode on the BM280. 
+
+This macro generate a bitfield for use in writing to the BM280 Control Measure Setting. Use the following values for setting the mode\+:
+\begin{DoxyItemize}
+\item BM280\+\_\+\+MODE\+\_\+\+NORMAL
+\item BM280\+\_\+\+MODE\+\_\+\+SLEEP
+\item BM280\+\_\+\+MODE\+\_\+\+FORCED
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mode} & Use the Defined BM280\+\_\+\+MODE\+\_\+\+XXX to assign the correct values. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Bitfield to be written into register. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{bm280__settings_8h_source_l00162}{162}} of file \mbox{\hyperlink{bm280__settings_8h_source}{bm280\+\_\+settings.\+h}}.
+

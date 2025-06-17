@@ -1,6 +1,8 @@
 #ifndef PICO_W_MQTT_H
 #define PICO_W_MQTT_H
 
+#include <stdio.h>
+
 #define MQTT_SERVER         "192.168.61.111"
 
 #define MQTT_TOPIC_LEN      100
@@ -28,6 +30,12 @@
 #define MQTT_LWT_TOPIC      "/online"
 #define MQTT_LWT_RETAIN_MSG true
 
+#define MQTT_DEBUG          1
+#if MQTT_DEBUG
+#define MQTT_LOG(...) printf(__VA_ARGS__)
+#else
+#define MQTT_LOG(...)
+#endif
 
 typedef struct MQTT_CLIENT_DATA_T *MQTT_client_handle_t;
 

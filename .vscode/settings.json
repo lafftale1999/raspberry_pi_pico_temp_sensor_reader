@@ -33,6 +33,12 @@
         "PICO_TOOLCHAIN_PATH": "${env:HOME}/.pico-sdk/toolchain/14_2_Rel1",
         "PATH": "${env:HOME}/.pico-sdk/toolchain/14_2_Rel1/bin:${env:HOME}/.pico-sdk/picotool/2.1.1/picotool:${env:HOME}/.pico-sdk/cmake/v3.31.5/bin:${env:HOME}/.pico-sdk/ninja/v1.12.1:${env:PATH}"
     },
+    "C_Cpp.default.includePath": [
+    "${workspaceFolder}/**",
+    "${workspaceFolder}/bm280_driver/include",
+    "${workspaceFolder}/bm280_driver/internal"
+    ],
+    "C_Cpp.default.compileCommands": "${workspaceFolder}/build/compile_commands.json",
     "raspberry-pi-pico.cmakeAutoConfigure": true,
     "raspberry-pi-pico.useCmakeTools": true,
     "raspberry-pi-pico.cmakePath": "${HOME}/.pico-sdk/cmake/v3.31.5/bin/cmake",
@@ -53,6 +59,9 @@
         "random": "cpp",
         "bm280.h": "c",
         "i2c_pico.h": "c",
-        "bm280_json.h": "c"
+        "bm280_json.h": "c",
+        "bm280_settings.h": "c",
+        "bm280_internal.h": "c",
+        "bm280_registers.h": "c"
     }
 }

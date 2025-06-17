@@ -35,14 +35,14 @@ struct MQTT_CLIENT_DATA_T{
 
 static void pub_request_cb(__unused void *arg, err_t err) {
     if (err != 0) {
-        printf("pub_request_cb failed %d", (uint8_t)err);
+        MQTT_LOG("pub_request_cb failed %d", (uint8_t)err);
     }
 }
 
 static void sub_request_cb(void *arg, err_t err) {
     MQTT_client_handle_t handle = (MQTT_client_handle_t)arg;
     if (err != 0) {
-        panic("subscribe request failed %d", err);
+        MQTT_LOG("subscribe request failed %d", err);
     }
     handle->subscribe_count++;
 }
@@ -64,9 +64,9 @@ static void unsub_request_cb(void *arg, err_t err) {
 static void mqtt_connection_cb(mqtt_client_t *client, void *arg, mqtt_connection_status_t status) {
     MQTT_client_handle_t handle = (MQTT_client_handle_t)arg;
 
-    printf("mqtt_connection_cb called! status: %d\n", status);
+    MQTT_LOG("mqtt_connection_cb called! status: %d\n", status);
     if (status == MQTT_CONNECT_ACCEPTED) {
-        printf("MQTT connected!\n");
+        MQTT_LOG("MQTT connected!\n");
         handle->connect_done = true;
 
         // indicate online
@@ -75,7 +75,7 @@ static void mqtt_connection_cb(mqtt_client_t *client, void *arg, mqtt_connection
         }
 
     } else if (status == MQTT_CONNECT_DISCONNECTED) {
-        printf("Not MQTT connected!\n");
+        MQTT_LOG("Not MQTT connected!\n");
         if (!handle->connect_done) {
             panic("Failed to connect to mqtt server");
         }
@@ -96,23 +96,7 @@ static void mqtt_incoming_data_cb(void *handle, const u8_t *data, u16_t len, u8_
     state->len = len;
     state->data[len] = '\0';
 
-    printf("Topic: %s, Message: %s\n", state->topic, state->data);
-
-/*     if (strcmp(basic_topic, "/led") == 0)
-    {
-        if (lwip_stricmp((const char *)state->data, "On") == 0 || strcmp((const char *)state->data, "1") == 0)
-            control_led(state, true);
-        else if (lwip_stricmp((const char *)state->data, "Off") == 0 || strcmp((const char *)state->data, "0") == 0)
-            control_led(state, false);
-    } else if (strcmp(basic_topic, "/print") == 0) {
-        printf("%.*s\n", len, data);
-    } else if (strcmp(basic_topic, "/ping") == 0) {
-        char buf[11];
-        snprintf(buf, sizeof(buf), "%u", to_ms_since_boot(get_absolute_time()) / 1000);
-        mqtt_publish(state->mqtt_client_inst, "/uptime", buf, strlen(buf), MQTT_PUB_QOS, MQTT_PUB_RETAIN, pub_request_cb, state);
-    } else if (strcmp(basic_topic, "/exit") == 0) {
-        state->stop_client = true; // stop the client when ALL subscriptions are stopped
-    } */
+    MQTT_LOG("Topic: %s, Message: %s\n", state->topic, state->data);
 }
 
 static void mqtt_incoming_publish_cb(void *handle, const char *topic, u32_t tot_len) {
@@ -123,18 +107,18 @@ static void mqtt_incoming_publish_cb(void *handle, const char *topic, u32_t tot_
 static void start_client(MQTT_client_handle_t handle) {
 #if LWIP_ALTCP && LWIP_ALTCP_TLS
     const int port = MQTT_TLS_PORT;
-    printf("Using TLS\n");
+    MQTT_LOG("Using TLS\n");
 #else
     const int port = MQTT_PORT;
-    printf("Warning: Not using TLS\n");
+    MQTT_LOG("Warning: Not using TLS\n");
 #endif
 
     handle->mqtt_client_inst = mqtt_client_new();
     if (!handle->mqtt_client_inst) {
         panic("MQTT client instance creation error");
     }
-    printf("IP address of this device %s\n", ipaddr_ntoa(&(netif_list->ip_addr)));
-    printf("Connecting to mqtt server at %s\n", ipaddr_ntoa(&handle->mqtt_server_address));
+    MQTT_LOG("IP address of this device %s\n", ipaddr_ntoa(&(netif_list->ip_addr)));
+    MQTT_LOG("Connecting to mqtt server at %s\n", ipaddr_ntoa(&handle->mqtt_server_address));
 
     cyw43_arch_lwip_begin();
     if (mqtt_client_connect(handle->mqtt_client_inst, &handle->mqtt_server_address, port, mqtt_connection_cb, handle, &handle->mqtt_client_info) != ERR_OK) {
@@ -165,7 +149,7 @@ int MQTT_open(MQTT_client_handle_t *handle) {
     MQTT_client_handle_t temp_handle = malloc(sizeof(struct MQTT_CLIENT_DATA_T));
 
     if(temp_handle == NULL) {
-        printf("Failed to allocate MQTT handle in memory\n");
+        MQTT_LOG("Failed to allocate MQTT handle in memory\n");
         goto exit;
     }
 
@@ -173,14 +157,14 @@ int MQTT_open(MQTT_client_handle_t *handle) {
     char unique_id_buf[sizeof(DEVICE_MODEL)];
     pico_get_unique_board_id_string(unique_id_buf, sizeof(unique_id_buf));
 
-    printf("Generated ID: %s\n", unique_id_buf);
+    MQTT_LOG("Generated ID: %s\n", unique_id_buf);
 
     char device_id[sizeof(DEVICE_MODEL) + sizeof(unique_id_buf) - 1];
     memcpy(device_id, DEVICE_MODEL, sizeof(DEVICE_MODEL) - 1);
     memcpy(&device_id[sizeof(DEVICE_MODEL)], unique_id_buf, sizeof(unique_id_buf) - 1);
     device_id[sizeof(device_id) - 1] = '\0';
 
-    printf("Device id finished: %s\n", device_id);
+    MQTT_LOG("Device id finished: %s\n", device_id);
 
     temp_handle->mqtt_client_info.client_id = device_id;
 
@@ -206,28 +190,28 @@ int MQTT_open(MQTT_client_handle_t *handle) {
     #if LWIP_ALTCP && LWIP_ALTCP_TLS
     #ifdef MQTT_CERT_INC
 
-        printf("CERT LEN: %u\n", (unsigned int)ca_cert_len);
-        printf("CERT BEGIN: %.30s...\n", ca_cert);
+        MQTT_LOG("CERT LEN: %u\n", (unsigned int)sizeof(ca_cert));
+        MQTT_LOG("CERT BEGIN: %.30s...\n", ca_cert);
 
-        printf("Try parse: %.60s...\n", ca_cert);
+        MQTT_LOG("Try parse: %.60s...\n", ca_cert);
 
 
         temp_handle->mqtt_client_info.tls_config = altcp_tls_create_config_client_2wayauth(
-            (const u8_t *)ca_cert, ca_cert_len,
-            (const u8_t *)client_key, client_key_len,
+            (const u8_t *)ca_cert, sizeof(ca_cert),
+            (const u8_t *)client_key, sizeof(client_key),
             CLIENT_KEY_PASS, CLIENT_KEY_PASS_LEN,
-            (const u8_t *)client_cert, client_cert_len
+            (const u8_t *)client_cert, sizeof(client_cert)
         );
 
 
         if (temp_handle->mqtt_client_info.tls_config == NULL) {
-            printf("TLS config creation failed!\n");
+            MQTT_LOG("TLS config creation failed!\n");
         } else {
-            printf("TLS config OK\n");
+            MQTT_LOG("TLS config OK\n");
         }
 
     #if ALTCP_MBEDTLS_AUTHMODE != MBEDTLS_SSL_VERIFY_REQUIRED
-        printf("Warning: tls without verification is insecure\n");
+        MQTT_LOG("Warning: tls without verification is insecure\n");
     #endif
     #else
         state->client_info.tls_config = altcp_tls_create_config_client(NULL, 0);
@@ -244,27 +228,23 @@ int MQTT_open(MQTT_client_handle_t *handle) {
     cyw43_arch_lwip_end();
 
     if(err) {
-        printf("Failed to assign a correct IP-address for broker\n");
+        MQTT_LOG("Failed to assign a correct IP-address for broker\n");
         goto exit;
     }
     #else
     err = ipaddr_aton(MQTT_SERVER, &temp_handle->mqtt_server_address);
     if(!err) {
-        printf("Failed to assign a correct IP-address for broker\n");
+        MQTT_LOG("Failed to assign a correct IP-address for broker\n");
         goto exit;
     }
     #endif
     
     start_client(temp_handle);
 
-    printf("Before connected loop: %d \n", temp_handle->connect_done);
     while (!temp_handle->connect_done || !mqtt_client_is_connected(temp_handle->mqtt_client_inst)) {
-        printf("Inside connection loop\n");
         cyw43_arch_poll();
         cyw43_arch_wait_for_work_until(make_timeout_time_ms(10000));
     }
-
-    printf("After connection loop\n");
 
     *handle = temp_handle;
 
@@ -283,11 +263,11 @@ int MQTT_publish(MQTT_client_handle_t handle, const char *topic, const char *pay
 
     if(err == ERR_OK) return 0;
     else if(err == ERR_MEM) {
-        printf("Out of memory error\n");
+        MQTT_LOG("Out of memory error\n");
         return 1;
     }
     else if(err == ERR_CONN) {
-        printf("Not connected to broker\n");
+        MQTT_LOG("Not connected to broker\n");
         return 1;
     }
 }
@@ -308,7 +288,7 @@ int MQTT_poll(MQTT_client_handle_t handle) {
     if (!handle) return 1;
     
     if (!mqtt_client_is_connected(handle->mqtt_client_inst)) {
-        printf("MQTT client not connected\n");
+        MQTT_LOG("MQTT client not connected\n");
         return 1;
     }
 
