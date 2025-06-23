@@ -1,3 +1,11 @@
+## About the project
+This project is my part of an IoT system built during my internship where I've implement the following key functions:
+
+* Reading temperature, moisture and pressure from the BME280.
+* Sending data from a Raspberry Pi Pico W to a Mosquitto MQTT broker.
+* Re-connect logic for both WiFi and MQTT.
+
+
 # Documentation Links for components
 
 [BME280](https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bme280-ds002.pdf)

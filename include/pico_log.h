@@ -11,4 +11,20 @@
 #define PICO_LOGI(...)
 #endif
 
+#define PICO_WARNING_MODE 1
+
+#if PICO_WARNING_MODE
+#define PICO_LOGW(...) (printf("Warning: %s", __VA_ARGS__))
+#else
+#define PICO_LOGW(...)
+#endif
+
+#define PICO_ERROR_MODE 1
+
+#if PICO_ERROR_MODE
+#define PICO_LOGE(...) (printf("ERROR: %s", __VA_ARGS__))
+#else
+#define PICO_LOGE(...)
+#endif
+
 #endif
