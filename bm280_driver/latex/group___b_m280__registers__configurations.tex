@@ -1,0 +1,80 @@
+\doxysubsubsubsection{Configuration Registers }
+\hypertarget{group___b_m280__registers__configurations}{}\label{group___b_m280__registers__configurations}\index{Configuration Registers@{Configuration Registers}}
+
+
+Registers used for configuring the reading mode, oversampling rates and IIR.  
+
+
+\doxysubsubsubsubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{group___b_m280__registers__configurations_gab2fc9f862a996f26993ec24548de7156}{BM280\+\_\+\+CONTROL\+\_\+\+HUMIDITY}}~0x\+F2
+\begin{DoxyCompactList}\small\item\em Humidity control register. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group___b_m280__registers__configurations_gad784b123a337bc47f10f95b2fe23c1fd}{BM280\+\_\+\+CONTROL\+\_\+\+MEASURE}}~0x\+F4
+\begin{DoxyCompactList}\small\item\em Temperature, pressure control and mode setting register. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group___b_m280__registers__configurations_gafcbddc36bbd083f03dcfe58f4662b4ee}{BM280\+\_\+\+CONFIG\+\_\+\+REGISTER}}~0x\+F5
+\begin{DoxyCompactList}\small\item\em Configuration register used for standby interval and IIR filter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsubsubsection{Detailed Description}
+Registers used for configuring the reading mode, oversampling rates and IIR. 
+
+
+
+\label{doc-define-members}
+\Hypertarget{group___b_m280__registers__configurations_doc-define-members}
+\doxysubsubsubsubsection{Macro Definition Documentation}
+\Hypertarget{group___b_m280__registers__configurations_gafcbddc36bbd083f03dcfe58f4662b4ee}\index{Configuration Registers@{Configuration Registers}!BM280\_CONFIG\_REGISTER@{BM280\_CONFIG\_REGISTER}}
+\index{BM280\_CONFIG\_REGISTER@{BM280\_CONFIG\_REGISTER}!Configuration Registers@{Configuration Registers}}
+\doxysubsubsubsubsubsection{\texorpdfstring{BM280\_CONFIG\_REGISTER}{BM280\_CONFIG\_REGISTER}}
+{\footnotesize\ttfamily \label{group___b_m280__registers__configurations_gafcbddc36bbd083f03dcfe58f4662b4ee} 
+\#define BM280\+\_\+\+CONFIG\+\_\+\+REGISTER~0x\+F5}
+
+
+
+Configuration register used for standby interval and IIR filter. 
+
+
+\begin{DoxyItemize}
+\item Standby interval\+: bits \mbox{[}5\+:7\mbox{]} ~\newline
+
+\item IIR filter\+: bits \mbox{[}2\+:4\mbox{]} 
+\end{DoxyItemize}
+
+Definition at line \mbox{\hyperlink{bm280__registers_8h_source_l00058}{58}} of file \mbox{\hyperlink{bm280__registers_8h_source}{bm280\+\_\+registers.\+h}}.
+
+\Hypertarget{group___b_m280__registers__configurations_gab2fc9f862a996f26993ec24548de7156}\index{Configuration Registers@{Configuration Registers}!BM280\_CONTROL\_HUMIDITY@{BM280\_CONTROL\_HUMIDITY}}
+\index{BM280\_CONTROL\_HUMIDITY@{BM280\_CONTROL\_HUMIDITY}!Configuration Registers@{Configuration Registers}}
+\doxysubsubsubsubsubsection{\texorpdfstring{BM280\_CONTROL\_HUMIDITY}{BM280\_CONTROL\_HUMIDITY}}
+{\footnotesize\ttfamily \label{group___b_m280__registers__configurations_gab2fc9f862a996f26993ec24548de7156} 
+\#define BM280\+\_\+\+CONTROL\+\_\+\+HUMIDITY~0x\+F2}
+
+
+
+Humidity control register. 
+
+Controls humidity oversampling rate 
+
+Definition at line \mbox{\hyperlink{bm280__registers_8h_source_l00041}{41}} of file \mbox{\hyperlink{bm280__registers_8h_source}{bm280\+\_\+registers.\+h}}.
+
+\Hypertarget{group___b_m280__registers__configurations_gad784b123a337bc47f10f95b2fe23c1fd}\index{Configuration Registers@{Configuration Registers}!BM280\_CONTROL\_MEASURE@{BM280\_CONTROL\_MEASURE}}
+\index{BM280\_CONTROL\_MEASURE@{BM280\_CONTROL\_MEASURE}!Configuration Registers@{Configuration Registers}}
+\doxysubsubsubsubsubsection{\texorpdfstring{BM280\_CONTROL\_MEASURE}{BM280\_CONTROL\_MEASURE}}
+{\footnotesize\ttfamily \label{group___b_m280__registers__configurations_gad784b123a337bc47f10f95b2fe23c1fd} 
+\#define BM280\+\_\+\+CONTROL\+\_\+\+MEASURE~0x\+F4}
+
+
+
+Temperature, pressure control and mode setting register. 
+
+
+\begin{DoxyItemize}
+\item Temperature\+: bits \mbox{[}5\+:7\mbox{]} ~\newline
+
+\item Pressure\+: bits \mbox{[}2\+:4\mbox{]} ~\newline
+
+\item Mode\+: bits \mbox{[}0\+:1\mbox{]} 
+\end{DoxyItemize}
+
+Definition at line \mbox{\hyperlink{bm280__registers_8h_source_l00050}{50}} of file \mbox{\hyperlink{bm280__registers_8h_source}{bm280\+\_\+registers.\+h}}.
+

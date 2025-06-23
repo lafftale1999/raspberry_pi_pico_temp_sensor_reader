@@ -1,5 +1,5 @@
     #include "include/i2c_pico.h"
-    #include "include/bm280_driver.h"
+    #include "bm280_driver/bm280.h"
     #include "include/pico_wifi.h"
     #include "include/pico_mqtt.h"
     #include "pico/time.h"

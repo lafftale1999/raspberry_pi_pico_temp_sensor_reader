@@ -1,0 +1,401 @@
+\doxysection{bm280\+\_\+handle\+\_\+internal Struct Reference}
+\hypertarget{structbm280__handle__internal}{}\label{structbm280__handle__internal}\index{bm280\_handle\_internal@{bm280\_handle\_internal}}
+
+
+Internal struct for BM280 driver state and calibration.  
+
+
+
+
+{\ttfamily \#include $<$bm280\+\_\+internal.\+h$>$}
+
+\doxysubsubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+int32\+\_\+t \mbox{\hyperlink{structbm280__handle__internal_adc1997c5d1e8baf2e65f34c37d1e67b6}{t\+\_\+fine}}
+\item 
+int32\+\_\+t \mbox{\hyperlink{structbm280__handle__internal_a8fbd26e965f3f364b7a36554f1c608ab}{temperature}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{structbm280__handle__internal_ada50c73da6f35f780ed1e178c03c099e}{pressure}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{structbm280__handle__internal_a6504ed55a0169c9e231169e9601b642a}{humidity}}
+\item 
+int32\+\_\+t \mbox{\hyperlink{structbm280__handle__internal_abe2c85a88095c16a031074703073acc2}{temp\+\_\+raw}}
+\item 
+int32\+\_\+t \mbox{\hyperlink{structbm280__handle__internal_ab73579b872ef8b45b40fffcc3ef97e4d}{press\+\_\+raw}}
+\item 
+int32\+\_\+t \mbox{\hyperlink{structbm280__handle__internal_ad25c2c48b187157fd2675b8c2262dd31}{hum\+\_\+raw}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structbm280__handle__internal_aa84cb4f0bec846cde6a18ebc423f593d}{i2c\+\_\+address}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structbm280__handle__internal_a90e49262900a3ba683e51d6937dee11f}{address\+\_\+length}}
+\item 
+char \mbox{\hyperlink{structbm280__handle__internal_a9f041dc513db8ccddc3893ac2b898af9}{json\+\_\+string}} \mbox{[}\mbox{\hyperlink{group___b_m280__json__defines_ga70e3b1a419ef7723396aafa7df11de70}{BM280\+\_\+\+JSON\+\_\+\+STR\+\_\+\+MAX\+\_\+\+LEN}}\mbox{]}
+\item 
+bool \mbox{\hyperlink{structbm280__handle__internal_ad6a29c62994b62d05edb0b57579879d0}{json\+\_\+parsed}}
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>struct \{\\
+\>\>uint16\_t \mbox{\hyperlink{structbm280__handle__internal_a18bbe2d56938e772556029671101cce9}{dig\_t1}}\\
+\>\>int16\_t \mbox{\hyperlink{structbm280__handle__internal_a3127af8c692c7cdcca6c1122c0e9c9b3}{dig\_t2}}\\
+\>\>int16\_t \mbox{\hyperlink{structbm280__handle__internal_af5e669080a46ca1971d8cc75d45291cc}{dig\_t3}}\\
+\>\} \mbox{\hyperlink{structbm280__handle__internal_a28987b53e93f4920b9b13259bc6c0146}{temp}}\\
+\>struct \{\\
+\>\>uint16\_t \mbox{\hyperlink{structbm280__handle__internal_abc8a4b73df0d8389d9a5825f21292377}{dig\_p1}}\\
+\>\>int16\_t \mbox{\hyperlink{structbm280__handle__internal_a5da51319960f215e4fa84f4439d07f5d}{dig\_p2}}\\
+\>\>int16\_t \mbox{\hyperlink{structbm280__handle__internal_a170ac1887fab11d43b0a4bfb2b9a13d3}{dig\_p3}}\\
+\>\>int16\_t \mbox{\hyperlink{structbm280__handle__internal_a96c06ac1add12c637c95df7441a072d2}{dig\_p4}}\\
+\>\>int16\_t \mbox{\hyperlink{structbm280__handle__internal_ac649068cf157f9c44975286e79e6eead}{dig\_p5}}\\
+\>\>int16\_t \mbox{\hyperlink{structbm280__handle__internal_a35dd3db0eb9c14cdfbaf3aa16177df87}{dig\_p6}}\\
+\>\>int16\_t \mbox{\hyperlink{structbm280__handle__internal_ad05ca9306f41d05781fc7e1536035bd6}{dig\_p7}}\\
+\>\>int16\_t \mbox{\hyperlink{structbm280__handle__internal_aacf4b738b3b433b5d4ebdc68637366a5}{dig\_p8}}\\
+\>\>int16\_t \mbox{\hyperlink{structbm280__handle__internal_af95c62e8e4d9f8f94749a78881dc3a7a}{dig\_p9}}\\
+\>\} \mbox{\hyperlink{structbm280__handle__internal_aa8f49a31e8f3ac08a793f77048fa6a8b}{press}}\\
+\>struct \{\\
+\>\>uint8\_t \mbox{\hyperlink{structbm280__handle__internal_a784a62fb63e2f1d90bc566639a4fe7f0}{dig\_h1}}\\
+\>\>int16\_t \mbox{\hyperlink{structbm280__handle__internal_a175014b8b4378e3e00b69c712dbb78e7}{dig\_h2}}\\
+\>\>uint8\_t \mbox{\hyperlink{structbm280__handle__internal_a0ea74a31588cffa0dd86ccbb55d47c24}{dig\_h3}}\\
+\>\>int16\_t \mbox{\hyperlink{structbm280__handle__internal_a5b72942200cbea5b8ffcbe94a24de570}{dig\_h4}}\\
+\>\>int16\_t \mbox{\hyperlink{structbm280__handle__internal_a5ee7583d8bc9f4c7c6ea59340f23060e}{dig\_h5}}\\
+\>\>int8\_t \mbox{\hyperlink{structbm280__handle__internal_ae6eb4f13c825058511df399f703e806b}{dig\_h6}}\\
+\>\} \mbox{\hyperlink{structbm280__handle__internal_a6efac1cf135a67b64f19647070273035}{hum}}\\
+\} \mbox{\hyperlink{structbm280__handle__internal_ab1e3d3e0661062061675b3fce847b9dc}{cal\_val}}\\
+
+\end{tabbing}\begin{DoxyCompactList}\small\item\em Calibration values grouped by sensor type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Internal struct for BM280 driver state and calibration. 
+
+Definition at line \mbox{\hyperlink{bm280__internal_8h_source_l00030}{30}} of file \mbox{\hyperlink{bm280__internal_8h_source}{bm280\+\_\+internal.\+h}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{structbm280__handle__internal_doc-variable-members}
+\doxysubsection{Field Documentation}
+\Hypertarget{structbm280__handle__internal_a90e49262900a3ba683e51d6937dee11f}\index{bm280\_handle\_internal@{bm280\_handle\_internal}!address\_length@{address\_length}}
+\index{address\_length@{address\_length}!bm280\_handle\_internal@{bm280\_handle\_internal}}
+\doxysubsubsection{\texorpdfstring{address\_length}{address\_length}}
+{\footnotesize\ttfamily \label{structbm280__handle__internal_a90e49262900a3ba683e51d6937dee11f} 
+uint8\+\_\+t bm280\+\_\+handle\+\_\+internal\+::address\+\_\+length}
+
+I2C address length. 
+
+Definition at line \mbox{\hyperlink{bm280__internal_8h_source_l00041}{41}} of file \mbox{\hyperlink{bm280__internal_8h_source}{bm280\+\_\+internal.\+h}}.
+
+\Hypertarget{structbm280__handle__internal_ab1e3d3e0661062061675b3fce847b9dc}\index{bm280\_handle\_internal@{bm280\_handle\_internal}!cal\_val@{cal\_val}}
+\index{cal\_val@{cal\_val}!bm280\_handle\_internal@{bm280\_handle\_internal}}
+\doxysubsubsection{\texorpdfstring{[struct]}{[struct]}}
+{\footnotesize\ttfamily \label{structbm280__handle__internal_ab1e3d3e0661062061675b3fce847b9dc} 
+struct  \{ ... \}  bm280\+\_\+handle\+\_\+internal\+::cal\+\_\+val}
+
+
+
+Calibration values grouped by sensor type. 
+
+\Hypertarget{structbm280__handle__internal_a784a62fb63e2f1d90bc566639a4fe7f0}\index{bm280\_handle\_internal@{bm280\_handle\_internal}!dig\_h1@{dig\_h1}}
+\index{dig\_h1@{dig\_h1}!bm280\_handle\_internal@{bm280\_handle\_internal}}
+\doxysubsubsection{\texorpdfstring{dig\_h1}{dig\_h1}}
+{\footnotesize\ttfamily \label{structbm280__handle__internal_a784a62fb63e2f1d90bc566639a4fe7f0} 
+uint8\+\_\+t bm280\+\_\+handle\+\_\+internal\+::dig\+\_\+h1}
+
+
+
+Definition at line \mbox{\hyperlink{bm280__internal_8h_source_l00069}{69}} of file \mbox{\hyperlink{bm280__internal_8h_source}{bm280\+\_\+internal.\+h}}.
+
+\Hypertarget{structbm280__handle__internal_a175014b8b4378e3e00b69c712dbb78e7}\index{bm280\_handle\_internal@{bm280\_handle\_internal}!dig\_h2@{dig\_h2}}
+\index{dig\_h2@{dig\_h2}!bm280\_handle\_internal@{bm280\_handle\_internal}}
+\doxysubsubsection{\texorpdfstring{dig\_h2}{dig\_h2}}
+{\footnotesize\ttfamily \label{structbm280__handle__internal_a175014b8b4378e3e00b69c712dbb78e7} 
+int16\+\_\+t bm280\+\_\+handle\+\_\+internal\+::dig\+\_\+h2}
+
+
+
+Definition at line \mbox{\hyperlink{bm280__internal_8h_source_l00070}{70}} of file \mbox{\hyperlink{bm280__internal_8h_source}{bm280\+\_\+internal.\+h}}.
+
+\Hypertarget{structbm280__handle__internal_a0ea74a31588cffa0dd86ccbb55d47c24}\index{bm280\_handle\_internal@{bm280\_handle\_internal}!dig\_h3@{dig\_h3}}
+\index{dig\_h3@{dig\_h3}!bm280\_handle\_internal@{bm280\_handle\_internal}}
+\doxysubsubsection{\texorpdfstring{dig\_h3}{dig\_h3}}
+{\footnotesize\ttfamily \label{structbm280__handle__internal_a0ea74a31588cffa0dd86ccbb55d47c24} 
+uint8\+\_\+t bm280\+\_\+handle\+\_\+internal\+::dig\+\_\+h3}
+
+
+
+Definition at line \mbox{\hyperlink{bm280__internal_8h_source_l00071}{71}} of file \mbox{\hyperlink{bm280__internal_8h_source}{bm280\+\_\+internal.\+h}}.
+
+\Hypertarget{structbm280__handle__internal_a5b72942200cbea5b8ffcbe94a24de570}\index{bm280\_handle\_internal@{bm280\_handle\_internal}!dig\_h4@{dig\_h4}}
+\index{dig\_h4@{dig\_h4}!bm280\_handle\_internal@{bm280\_handle\_internal}}
+\doxysubsubsection{\texorpdfstring{dig\_h4}{dig\_h4}}
+{\footnotesize\ttfamily \label{structbm280__handle__internal_a5b72942200cbea5b8ffcbe94a24de570} 
+int16\+\_\+t bm280\+\_\+handle\+\_\+internal\+::dig\+\_\+h4}
+
+
+
+Definition at line \mbox{\hyperlink{bm280__internal_8h_source_l00072}{72}} of file \mbox{\hyperlink{bm280__internal_8h_source}{bm280\+\_\+internal.\+h}}.
+
+\Hypertarget{structbm280__handle__internal_a5ee7583d8bc9f4c7c6ea59340f23060e}\index{bm280\_handle\_internal@{bm280\_handle\_internal}!dig\_h5@{dig\_h5}}
+\index{dig\_h5@{dig\_h5}!bm280\_handle\_internal@{bm280\_handle\_internal}}
+\doxysubsubsection{\texorpdfstring{dig\_h5}{dig\_h5}}
+{\footnotesize\ttfamily \label{structbm280__handle__internal_a5ee7583d8bc9f4c7c6ea59340f23060e} 
+int16\+\_\+t bm280\+\_\+handle\+\_\+internal\+::dig\+\_\+h5}
+
+
+
+Definition at line \mbox{\hyperlink{bm280__internal_8h_source_l00073}{73}} of file \mbox{\hyperlink{bm280__internal_8h_source}{bm280\+\_\+internal.\+h}}.
+
+\Hypertarget{structbm280__handle__internal_ae6eb4f13c825058511df399f703e806b}\index{bm280\_handle\_internal@{bm280\_handle\_internal}!dig\_h6@{dig\_h6}}
+\index{dig\_h6@{dig\_h6}!bm280\_handle\_internal@{bm280\_handle\_internal}}
+\doxysubsubsection{\texorpdfstring{dig\_h6}{dig\_h6}}
+{\footnotesize\ttfamily \label{structbm280__handle__internal_ae6eb4f13c825058511df399f703e806b} 
+int8\+\_\+t bm280\+\_\+handle\+\_\+internal\+::dig\+\_\+h6}
+
+
+
+Definition at line \mbox{\hyperlink{bm280__internal_8h_source_l00074}{74}} of file \mbox{\hyperlink{bm280__internal_8h_source}{bm280\+\_\+internal.\+h}}.
+
+\Hypertarget{structbm280__handle__internal_abc8a4b73df0d8389d9a5825f21292377}\index{bm280\_handle\_internal@{bm280\_handle\_internal}!dig\_p1@{dig\_p1}}
+\index{dig\_p1@{dig\_p1}!bm280\_handle\_internal@{bm280\_handle\_internal}}
+\doxysubsubsection{\texorpdfstring{dig\_p1}{dig\_p1}}
+{\footnotesize\ttfamily \label{structbm280__handle__internal_abc8a4b73df0d8389d9a5825f21292377} 
+uint16\+\_\+t bm280\+\_\+handle\+\_\+internal\+::dig\+\_\+p1}
+
+
+
+Definition at line \mbox{\hyperlink{bm280__internal_8h_source_l00057}{57}} of file \mbox{\hyperlink{bm280__internal_8h_source}{bm280\+\_\+internal.\+h}}.
+
+\Hypertarget{structbm280__handle__internal_a5da51319960f215e4fa84f4439d07f5d}\index{bm280\_handle\_internal@{bm280\_handle\_internal}!dig\_p2@{dig\_p2}}
+\index{dig\_p2@{dig\_p2}!bm280\_handle\_internal@{bm280\_handle\_internal}}
+\doxysubsubsection{\texorpdfstring{dig\_p2}{dig\_p2}}
+{\footnotesize\ttfamily \label{structbm280__handle__internal_a5da51319960f215e4fa84f4439d07f5d} 
+int16\+\_\+t bm280\+\_\+handle\+\_\+internal\+::dig\+\_\+p2}
+
+
+
+Definition at line \mbox{\hyperlink{bm280__internal_8h_source_l00058}{58}} of file \mbox{\hyperlink{bm280__internal_8h_source}{bm280\+\_\+internal.\+h}}.
+
+\Hypertarget{structbm280__handle__internal_a170ac1887fab11d43b0a4bfb2b9a13d3}\index{bm280\_handle\_internal@{bm280\_handle\_internal}!dig\_p3@{dig\_p3}}
+\index{dig\_p3@{dig\_p3}!bm280\_handle\_internal@{bm280\_handle\_internal}}
+\doxysubsubsection{\texorpdfstring{dig\_p3}{dig\_p3}}
+{\footnotesize\ttfamily \label{structbm280__handle__internal_a170ac1887fab11d43b0a4bfb2b9a13d3} 
+int16\+\_\+t bm280\+\_\+handle\+\_\+internal\+::dig\+\_\+p3}
+
+
+
+Definition at line \mbox{\hyperlink{bm280__internal_8h_source_l00059}{59}} of file \mbox{\hyperlink{bm280__internal_8h_source}{bm280\+\_\+internal.\+h}}.
+
+\Hypertarget{structbm280__handle__internal_a96c06ac1add12c637c95df7441a072d2}\index{bm280\_handle\_internal@{bm280\_handle\_internal}!dig\_p4@{dig\_p4}}
+\index{dig\_p4@{dig\_p4}!bm280\_handle\_internal@{bm280\_handle\_internal}}
+\doxysubsubsection{\texorpdfstring{dig\_p4}{dig\_p4}}
+{\footnotesize\ttfamily \label{structbm280__handle__internal_a96c06ac1add12c637c95df7441a072d2} 
+int16\+\_\+t bm280\+\_\+handle\+\_\+internal\+::dig\+\_\+p4}
+
+
+
+Definition at line \mbox{\hyperlink{bm280__internal_8h_source_l00060}{60}} of file \mbox{\hyperlink{bm280__internal_8h_source}{bm280\+\_\+internal.\+h}}.
+
+\Hypertarget{structbm280__handle__internal_ac649068cf157f9c44975286e79e6eead}\index{bm280\_handle\_internal@{bm280\_handle\_internal}!dig\_p5@{dig\_p5}}
+\index{dig\_p5@{dig\_p5}!bm280\_handle\_internal@{bm280\_handle\_internal}}
+\doxysubsubsection{\texorpdfstring{dig\_p5}{dig\_p5}}
+{\footnotesize\ttfamily \label{structbm280__handle__internal_ac649068cf157f9c44975286e79e6eead} 
+int16\+\_\+t bm280\+\_\+handle\+\_\+internal\+::dig\+\_\+p5}
+
+
+
+Definition at line \mbox{\hyperlink{bm280__internal_8h_source_l00061}{61}} of file \mbox{\hyperlink{bm280__internal_8h_source}{bm280\+\_\+internal.\+h}}.
+
+\Hypertarget{structbm280__handle__internal_a35dd3db0eb9c14cdfbaf3aa16177df87}\index{bm280\_handle\_internal@{bm280\_handle\_internal}!dig\_p6@{dig\_p6}}
+\index{dig\_p6@{dig\_p6}!bm280\_handle\_internal@{bm280\_handle\_internal}}
+\doxysubsubsection{\texorpdfstring{dig\_p6}{dig\_p6}}
+{\footnotesize\ttfamily \label{structbm280__handle__internal_a35dd3db0eb9c14cdfbaf3aa16177df87} 
+int16\+\_\+t bm280\+\_\+handle\+\_\+internal\+::dig\+\_\+p6}
+
+
+
+Definition at line \mbox{\hyperlink{bm280__internal_8h_source_l00062}{62}} of file \mbox{\hyperlink{bm280__internal_8h_source}{bm280\+\_\+internal.\+h}}.
+
+\Hypertarget{structbm280__handle__internal_ad05ca9306f41d05781fc7e1536035bd6}\index{bm280\_handle\_internal@{bm280\_handle\_internal}!dig\_p7@{dig\_p7}}
+\index{dig\_p7@{dig\_p7}!bm280\_handle\_internal@{bm280\_handle\_internal}}
+\doxysubsubsection{\texorpdfstring{dig\_p7}{dig\_p7}}
+{\footnotesize\ttfamily \label{structbm280__handle__internal_ad05ca9306f41d05781fc7e1536035bd6} 
+int16\+\_\+t bm280\+\_\+handle\+\_\+internal\+::dig\+\_\+p7}
+
+
+
+Definition at line \mbox{\hyperlink{bm280__internal_8h_source_l00063}{63}} of file \mbox{\hyperlink{bm280__internal_8h_source}{bm280\+\_\+internal.\+h}}.
+
+\Hypertarget{structbm280__handle__internal_aacf4b738b3b433b5d4ebdc68637366a5}\index{bm280\_handle\_internal@{bm280\_handle\_internal}!dig\_p8@{dig\_p8}}
+\index{dig\_p8@{dig\_p8}!bm280\_handle\_internal@{bm280\_handle\_internal}}
+\doxysubsubsection{\texorpdfstring{dig\_p8}{dig\_p8}}
+{\footnotesize\ttfamily \label{structbm280__handle__internal_aacf4b738b3b433b5d4ebdc68637366a5} 
+int16\+\_\+t bm280\+\_\+handle\+\_\+internal\+::dig\+\_\+p8}
+
+
+
+Definition at line \mbox{\hyperlink{bm280__internal_8h_source_l00064}{64}} of file \mbox{\hyperlink{bm280__internal_8h_source}{bm280\+\_\+internal.\+h}}.
+
+\Hypertarget{structbm280__handle__internal_af95c62e8e4d9f8f94749a78881dc3a7a}\index{bm280\_handle\_internal@{bm280\_handle\_internal}!dig\_p9@{dig\_p9}}
+\index{dig\_p9@{dig\_p9}!bm280\_handle\_internal@{bm280\_handle\_internal}}
+\doxysubsubsection{\texorpdfstring{dig\_p9}{dig\_p9}}
+{\footnotesize\ttfamily \label{structbm280__handle__internal_af95c62e8e4d9f8f94749a78881dc3a7a} 
+int16\+\_\+t bm280\+\_\+handle\+\_\+internal\+::dig\+\_\+p9}
+
+
+
+Definition at line \mbox{\hyperlink{bm280__internal_8h_source_l00065}{65}} of file \mbox{\hyperlink{bm280__internal_8h_source}{bm280\+\_\+internal.\+h}}.
+
+\Hypertarget{structbm280__handle__internal_a18bbe2d56938e772556029671101cce9}\index{bm280\_handle\_internal@{bm280\_handle\_internal}!dig\_t1@{dig\_t1}}
+\index{dig\_t1@{dig\_t1}!bm280\_handle\_internal@{bm280\_handle\_internal}}
+\doxysubsubsection{\texorpdfstring{dig\_t1}{dig\_t1}}
+{\footnotesize\ttfamily \label{structbm280__handle__internal_a18bbe2d56938e772556029671101cce9} 
+uint16\+\_\+t bm280\+\_\+handle\+\_\+internal\+::dig\+\_\+t1}
+
+
+
+Definition at line \mbox{\hyperlink{bm280__internal_8h_source_l00051}{51}} of file \mbox{\hyperlink{bm280__internal_8h_source}{bm280\+\_\+internal.\+h}}.
+
+\Hypertarget{structbm280__handle__internal_a3127af8c692c7cdcca6c1122c0e9c9b3}\index{bm280\_handle\_internal@{bm280\_handle\_internal}!dig\_t2@{dig\_t2}}
+\index{dig\_t2@{dig\_t2}!bm280\_handle\_internal@{bm280\_handle\_internal}}
+\doxysubsubsection{\texorpdfstring{dig\_t2}{dig\_t2}}
+{\footnotesize\ttfamily \label{structbm280__handle__internal_a3127af8c692c7cdcca6c1122c0e9c9b3} 
+int16\+\_\+t bm280\+\_\+handle\+\_\+internal\+::dig\+\_\+t2}
+
+
+
+Definition at line \mbox{\hyperlink{bm280__internal_8h_source_l00052}{52}} of file \mbox{\hyperlink{bm280__internal_8h_source}{bm280\+\_\+internal.\+h}}.
+
+\Hypertarget{structbm280__handle__internal_af5e669080a46ca1971d8cc75d45291cc}\index{bm280\_handle\_internal@{bm280\_handle\_internal}!dig\_t3@{dig\_t3}}
+\index{dig\_t3@{dig\_t3}!bm280\_handle\_internal@{bm280\_handle\_internal}}
+\doxysubsubsection{\texorpdfstring{dig\_t3}{dig\_t3}}
+{\footnotesize\ttfamily \label{structbm280__handle__internal_af5e669080a46ca1971d8cc75d45291cc} 
+int16\+\_\+t bm280\+\_\+handle\+\_\+internal\+::dig\+\_\+t3}
+
+
+
+Definition at line \mbox{\hyperlink{bm280__internal_8h_source_l00053}{53}} of file \mbox{\hyperlink{bm280__internal_8h_source}{bm280\+\_\+internal.\+h}}.
+
+\Hypertarget{structbm280__handle__internal_a6efac1cf135a67b64f19647070273035}\index{bm280\_handle\_internal@{bm280\_handle\_internal}!hum@{hum}}
+\index{hum@{hum}!bm280\_handle\_internal@{bm280\_handle\_internal}}
+\doxysubsubsection{\texorpdfstring{[struct]}{[struct]}}
+{\footnotesize\ttfamily \label{structbm280__handle__internal_a6efac1cf135a67b64f19647070273035} 
+struct  \{ ... \}  bm280\+\_\+handle\+\_\+internal\+::hum}
+
+\Hypertarget{structbm280__handle__internal_ad25c2c48b187157fd2675b8c2262dd31}\index{bm280\_handle\_internal@{bm280\_handle\_internal}!hum\_raw@{hum\_raw}}
+\index{hum\_raw@{hum\_raw}!bm280\_handle\_internal@{bm280\_handle\_internal}}
+\doxysubsubsection{\texorpdfstring{hum\_raw}{hum\_raw}}
+{\footnotesize\ttfamily \label{structbm280__handle__internal_ad25c2c48b187157fd2675b8c2262dd31} 
+int32\+\_\+t bm280\+\_\+handle\+\_\+internal\+::hum\+\_\+raw}
+
+Raw humidity reading from sensor. 
+
+Definition at line \mbox{\hyperlink{bm280__internal_8h_source_l00038}{38}} of file \mbox{\hyperlink{bm280__internal_8h_source}{bm280\+\_\+internal.\+h}}.
+
+\Hypertarget{structbm280__handle__internal_a6504ed55a0169c9e231169e9601b642a}\index{bm280\_handle\_internal@{bm280\_handle\_internal}!humidity@{humidity}}
+\index{humidity@{humidity}!bm280\_handle\_internal@{bm280\_handle\_internal}}
+\doxysubsubsection{\texorpdfstring{humidity}{humidity}}
+{\footnotesize\ttfamily \label{structbm280__handle__internal_a6504ed55a0169c9e231169e9601b642a} 
+uint32\+\_\+t bm280\+\_\+handle\+\_\+internal\+::humidity}
+
+Compensated humidity in 1/1024 RH. 
+
+Definition at line \mbox{\hyperlink{bm280__internal_8h_source_l00034}{34}} of file \mbox{\hyperlink{bm280__internal_8h_source}{bm280\+\_\+internal.\+h}}.
+
+\Hypertarget{structbm280__handle__internal_aa84cb4f0bec846cde6a18ebc423f593d}\index{bm280\_handle\_internal@{bm280\_handle\_internal}!i2c\_address@{i2c\_address}}
+\index{i2c\_address@{i2c\_address}!bm280\_handle\_internal@{bm280\_handle\_internal}}
+\doxysubsubsection{\texorpdfstring{i2c\_address}{i2c\_address}}
+{\footnotesize\ttfamily \label{structbm280__handle__internal_aa84cb4f0bec846cde6a18ebc423f593d} 
+uint8\+\_\+t bm280\+\_\+handle\+\_\+internal\+::i2c\+\_\+address}
+
+I2C address of the sensor. 
+
+Definition at line \mbox{\hyperlink{bm280__internal_8h_source_l00040}{40}} of file \mbox{\hyperlink{bm280__internal_8h_source}{bm280\+\_\+internal.\+h}}.
+
+\Hypertarget{structbm280__handle__internal_ad6a29c62994b62d05edb0b57579879d0}\index{bm280\_handle\_internal@{bm280\_handle\_internal}!json\_parsed@{json\_parsed}}
+\index{json\_parsed@{json\_parsed}!bm280\_handle\_internal@{bm280\_handle\_internal}}
+\doxysubsubsection{\texorpdfstring{json\_parsed}{json\_parsed}}
+{\footnotesize\ttfamily \label{structbm280__handle__internal_ad6a29c62994b62d05edb0b57579879d0} 
+bool bm280\+\_\+handle\+\_\+internal\+::json\+\_\+parsed}
+
+Flag if JSON is parsed. 
+
+Definition at line \mbox{\hyperlink{bm280__internal_8h_source_l00044}{44}} of file \mbox{\hyperlink{bm280__internal_8h_source}{bm280\+\_\+internal.\+h}}.
+
+\Hypertarget{structbm280__handle__internal_a9f041dc513db8ccddc3893ac2b898af9}\index{bm280\_handle\_internal@{bm280\_handle\_internal}!json\_string@{json\_string}}
+\index{json\_string@{json\_string}!bm280\_handle\_internal@{bm280\_handle\_internal}}
+\doxysubsubsection{\texorpdfstring{json\_string}{json\_string}}
+{\footnotesize\ttfamily \label{structbm280__handle__internal_a9f041dc513db8ccddc3893ac2b898af9} 
+char bm280\+\_\+handle\+\_\+internal\+::json\+\_\+string\mbox{[}\mbox{\hyperlink{group___b_m280__json__defines_ga70e3b1a419ef7723396aafa7df11de70}{BM280\+\_\+\+JSON\+\_\+\+STR\+\_\+\+MAX\+\_\+\+LEN}}\mbox{]}}
+
+JSON string buffer. 
+
+Definition at line \mbox{\hyperlink{bm280__internal_8h_source_l00043}{43}} of file \mbox{\hyperlink{bm280__internal_8h_source}{bm280\+\_\+internal.\+h}}.
+
+\Hypertarget{structbm280__handle__internal_aa8f49a31e8f3ac08a793f77048fa6a8b}\index{bm280\_handle\_internal@{bm280\_handle\_internal}!press@{press}}
+\index{press@{press}!bm280\_handle\_internal@{bm280\_handle\_internal}}
+\doxysubsubsection{\texorpdfstring{[struct]}{[struct]}}
+{\footnotesize\ttfamily \label{structbm280__handle__internal_aa8f49a31e8f3ac08a793f77048fa6a8b} 
+struct  \{ ... \}  bm280\+\_\+handle\+\_\+internal\+::press}
+
+\Hypertarget{structbm280__handle__internal_ab73579b872ef8b45b40fffcc3ef97e4d}\index{bm280\_handle\_internal@{bm280\_handle\_internal}!press\_raw@{press\_raw}}
+\index{press\_raw@{press\_raw}!bm280\_handle\_internal@{bm280\_handle\_internal}}
+\doxysubsubsection{\texorpdfstring{press\_raw}{press\_raw}}
+{\footnotesize\ttfamily \label{structbm280__handle__internal_ab73579b872ef8b45b40fffcc3ef97e4d} 
+int32\+\_\+t bm280\+\_\+handle\+\_\+internal\+::press\+\_\+raw}
+
+Raw pressure reading from sensor. 
+
+Definition at line \mbox{\hyperlink{bm280__internal_8h_source_l00037}{37}} of file \mbox{\hyperlink{bm280__internal_8h_source}{bm280\+\_\+internal.\+h}}.
+
+\Hypertarget{structbm280__handle__internal_ada50c73da6f35f780ed1e178c03c099e}\index{bm280\_handle\_internal@{bm280\_handle\_internal}!pressure@{pressure}}
+\index{pressure@{pressure}!bm280\_handle\_internal@{bm280\_handle\_internal}}
+\doxysubsubsection{\texorpdfstring{pressure}{pressure}}
+{\footnotesize\ttfamily \label{structbm280__handle__internal_ada50c73da6f35f780ed1e178c03c099e} 
+uint32\+\_\+t bm280\+\_\+handle\+\_\+internal\+::pressure}
+
+Compensated pressure in Pascal. 
+
+Definition at line \mbox{\hyperlink{bm280__internal_8h_source_l00033}{33}} of file \mbox{\hyperlink{bm280__internal_8h_source}{bm280\+\_\+internal.\+h}}.
+
+\Hypertarget{structbm280__handle__internal_adc1997c5d1e8baf2e65f34c37d1e67b6}\index{bm280\_handle\_internal@{bm280\_handle\_internal}!t\_fine@{t\_fine}}
+\index{t\_fine@{t\_fine}!bm280\_handle\_internal@{bm280\_handle\_internal}}
+\doxysubsubsection{\texorpdfstring{t\_fine}{t\_fine}}
+{\footnotesize\ttfamily \label{structbm280__handle__internal_adc1997c5d1e8baf2e65f34c37d1e67b6} 
+int32\+\_\+t bm280\+\_\+handle\+\_\+internal\+::t\+\_\+fine}
+
+Used internally for compensation calculations. 
+
+Definition at line \mbox{\hyperlink{bm280__internal_8h_source_l00031}{31}} of file \mbox{\hyperlink{bm280__internal_8h_source}{bm280\+\_\+internal.\+h}}.
+
+\Hypertarget{structbm280__handle__internal_a28987b53e93f4920b9b13259bc6c0146}\index{bm280\_handle\_internal@{bm280\_handle\_internal}!temp@{temp}}
+\index{temp@{temp}!bm280\_handle\_internal@{bm280\_handle\_internal}}
+\doxysubsubsection{\texorpdfstring{[struct]}{[struct]}}
+{\footnotesize\ttfamily \label{structbm280__handle__internal_a28987b53e93f4920b9b13259bc6c0146} 
+struct  \{ ... \}  bm280\+\_\+handle\+\_\+internal\+::temp}
+
+\Hypertarget{structbm280__handle__internal_abe2c85a88095c16a031074703073acc2}\index{bm280\_handle\_internal@{bm280\_handle\_internal}!temp\_raw@{temp\_raw}}
+\index{temp\_raw@{temp\_raw}!bm280\_handle\_internal@{bm280\_handle\_internal}}
+\doxysubsubsection{\texorpdfstring{temp\_raw}{temp\_raw}}
+{\footnotesize\ttfamily \label{structbm280__handle__internal_abe2c85a88095c16a031074703073acc2} 
+int32\+\_\+t bm280\+\_\+handle\+\_\+internal\+::temp\+\_\+raw}
+
+Raw temperature reading from sensor. 
+
+Definition at line \mbox{\hyperlink{bm280__internal_8h_source_l00036}{36}} of file \mbox{\hyperlink{bm280__internal_8h_source}{bm280\+\_\+internal.\+h}}.
+
+\Hypertarget{structbm280__handle__internal_a8fbd26e965f3f364b7a36554f1c608ab}\index{bm280\_handle\_internal@{bm280\_handle\_internal}!temperature@{temperature}}
+\index{temperature@{temperature}!bm280\_handle\_internal@{bm280\_handle\_internal}}
+\doxysubsubsection{\texorpdfstring{temperature}{temperature}}
+{\footnotesize\ttfamily \label{structbm280__handle__internal_a8fbd26e965f3f364b7a36554f1c608ab} 
+int32\+\_\+t bm280\+\_\+handle\+\_\+internal\+::temperature}
+
+Compensated temperature in hundredths of degrees Celsius. 
+
+Definition at line \mbox{\hyperlink{bm280__internal_8h_source_l00032}{32}} of file \mbox{\hyperlink{bm280__internal_8h_source}{bm280\+\_\+internal.\+h}}.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+internal/\mbox{\hyperlink{bm280__internal_8h}{bm280\+\_\+internal.\+h}}\end{DoxyCompactItemize}

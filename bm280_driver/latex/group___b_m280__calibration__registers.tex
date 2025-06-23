@@ -1,0 +1,141 @@
+\doxysubsubsubsection{Calibration Registers }
+\hypertarget{group___b_m280__calibration__registers}{}\label{group___b_m280__calibration__registers}\index{Calibration Registers@{Calibration Registers}}
+
+
+Registers holding factory calibration values.  
+
+
+\doxysubsubsubsubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{group___b_m280__calibration__registers_gab1f25d19f6c866ecce875c8c7ab2433d}{BM280\+\_\+\+TEMP\+\_\+\+CALIB\+\_\+\+PARAM\+\_\+\+START}}~0x88
+\item 
+\#define \mbox{\hyperlink{group___b_m280__calibration__registers_ga003a8faa075d6a5683ef39f962ed502f}{BM280\+\_\+\+TEMP\+\_\+\+PARAMS\+\_\+\+LEN}}~6
+\item 
+\#define \mbox{\hyperlink{group___b_m280__calibration__registers_gad5d0097e38fac71a01bbf39eb20c838d}{BM280\+\_\+\+PRESS\+\_\+\+CALIB\+\_\+\+PARAM\+\_\+\+START}}~0x8E
+\item 
+\#define \mbox{\hyperlink{group___b_m280__calibration__registers_ga415f6e7cf8d78c3ddeda6f0d1a923a26}{BM280\+\_\+\+PRESS\+\_\+\+PARAMS\+\_\+\+LEN}}~18
+\item 
+\#define \mbox{\hyperlink{group___b_m280__calibration__registers_ga9c5e4a1116225de64a02e93332dcac35}{BM280\+\_\+\+HUM\+\_\+\+CALIB\+\_\+\+FIRST}}~0x\+A1
+\item 
+\#define \mbox{\hyperlink{group___b_m280__calibration__registers_ga8090df6e039c5a1acbcc952a46000495}{BM280\+\_\+\+HUM\+\_\+\+CALIB\+\_\+\+FIRST\+\_\+\+LEN}}~1
+\item 
+\#define \mbox{\hyperlink{group___b_m280__calibration__registers_ga73b3c92cf72ed766bc42e6afcf7abed4}{BM280\+\_\+\+HUM\+\_\+\+CALIB\+\_\+\+CONTINUE}}~0x\+E1
+\item 
+\#define \mbox{\hyperlink{group___b_m280__calibration__registers_ga061e58b0971ef0a8fb87f915f96850b7}{BM280\+\_\+\+HUM\+\_\+\+CALIB\+\_\+\+CONTINUE\+\_\+\+LEN}}~8
+\item 
+\#define \mbox{\hyperlink{group___b_m280__calibration__registers_ga038b5386b05f885a4028fd418697549a}{BM280\+\_\+\+AMOUNT\+\_\+\+CALIB\+\_\+\+PARAMS}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsubsubsection{Detailed Description}
+Registers holding factory calibration values. 
+
+Calibration registers are sequentially stored and grouped by measurement type. 
+
+\label{doc-define-members}
+\Hypertarget{group___b_m280__calibration__registers_doc-define-members}
+\doxysubsubsubsubsection{Macro Definition Documentation}
+\Hypertarget{group___b_m280__calibration__registers_ga038b5386b05f885a4028fd418697549a}\index{Calibration Registers@{Calibration Registers}!BM280\_AMOUNT\_CALIB\_PARAMS@{BM280\_AMOUNT\_CALIB\_PARAMS}}
+\index{BM280\_AMOUNT\_CALIB\_PARAMS@{BM280\_AMOUNT\_CALIB\_PARAMS}!Calibration Registers@{Calibration Registers}}
+\doxysubsubsubsubsubsection{\texorpdfstring{BM280\_AMOUNT\_CALIB\_PARAMS}{BM280\_AMOUNT\_CALIB\_PARAMS}}
+{\footnotesize\ttfamily \label{group___b_m280__calibration__registers_ga038b5386b05f885a4028fd418697549a} 
+\#define BM280\+\_\+\+AMOUNT\+\_\+\+CALIB\+\_\+\+PARAMS}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ (\mbox{\hyperlink{group___b_m280__calibration__registers_ga003a8faa075d6a5683ef39f962ed502f}{BM280\_TEMP\_PARAMS\_LEN}}\ +\ \mbox{\hyperlink{group___b_m280__calibration__registers_ga415f6e7cf8d78c3ddeda6f0d1a923a26}{BM280\_PRESS\_PARAMS\_LEN}}\ +\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{group___b_m280__calibration__registers_ga8090df6e039c5a1acbcc952a46000495}{BM280\_HUM\_CALIB\_FIRST\_LEN}}\ +\ \mbox{\hyperlink{group___b_m280__calibration__registers_ga061e58b0971ef0a8fb87f915f96850b7}{BM280\_HUM\_CALIB\_CONTINUE\_LEN}})}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{bm280__registers_8h_source_l00103}{103}} of file \mbox{\hyperlink{bm280__registers_8h_source}{bm280\+\_\+registers.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00103\ \textcolor{preprocessor}{\#define\ BM280\_AMOUNT\_CALIB\_PARAMS\ \(\backslash\) }}
+\DoxyCodeLine{00104\ \textcolor{preprocessor}{\ \ \ \ (BM280\_TEMP\_PARAMS\_LEN\ +\ BM280\_PRESS\_PARAMS\_LEN\ +\ \(\backslash\) }}
+\DoxyCodeLine{00105\ \textcolor{preprocessor}{\ \ \ \ \ BM280\_HUM\_CALIB\_FIRST\_LEN\ +\ BM280\_HUM\_CALIB\_CONTINUE\_LEN) }}
+
+\end{DoxyCode}
+\Hypertarget{group___b_m280__calibration__registers_ga73b3c92cf72ed766bc42e6afcf7abed4}\index{Calibration Registers@{Calibration Registers}!BM280\_HUM\_CALIB\_CONTINUE@{BM280\_HUM\_CALIB\_CONTINUE}}
+\index{BM280\_HUM\_CALIB\_CONTINUE@{BM280\_HUM\_CALIB\_CONTINUE}!Calibration Registers@{Calibration Registers}}
+\doxysubsubsubsubsubsection{\texorpdfstring{BM280\_HUM\_CALIB\_CONTINUE}{BM280\_HUM\_CALIB\_CONTINUE}}
+{\footnotesize\ttfamily \label{group___b_m280__calibration__registers_ga73b3c92cf72ed766bc42e6afcf7abed4} 
+\#define BM280\+\_\+\+HUM\+\_\+\+CALIB\+\_\+\+CONTINUE~0x\+E1}
+
+
+
+Definition at line \mbox{\hyperlink{bm280__registers_8h_source_l00100}{100}} of file \mbox{\hyperlink{bm280__registers_8h_source}{bm280\+\_\+registers.\+h}}.
+
+\Hypertarget{group___b_m280__calibration__registers_ga061e58b0971ef0a8fb87f915f96850b7}\index{Calibration Registers@{Calibration Registers}!BM280\_HUM\_CALIB\_CONTINUE\_LEN@{BM280\_HUM\_CALIB\_CONTINUE\_LEN}}
+\index{BM280\_HUM\_CALIB\_CONTINUE\_LEN@{BM280\_HUM\_CALIB\_CONTINUE\_LEN}!Calibration Registers@{Calibration Registers}}
+\doxysubsubsubsubsubsection{\texorpdfstring{BM280\_HUM\_CALIB\_CONTINUE\_LEN}{BM280\_HUM\_CALIB\_CONTINUE\_LEN}}
+{\footnotesize\ttfamily \label{group___b_m280__calibration__registers_ga061e58b0971ef0a8fb87f915f96850b7} 
+\#define BM280\+\_\+\+HUM\+\_\+\+CALIB\+\_\+\+CONTINUE\+\_\+\+LEN~8}
+
+
+
+Definition at line \mbox{\hyperlink{bm280__registers_8h_source_l00101}{101}} of file \mbox{\hyperlink{bm280__registers_8h_source}{bm280\+\_\+registers.\+h}}.
+
+\Hypertarget{group___b_m280__calibration__registers_ga9c5e4a1116225de64a02e93332dcac35}\index{Calibration Registers@{Calibration Registers}!BM280\_HUM\_CALIB\_FIRST@{BM280\_HUM\_CALIB\_FIRST}}
+\index{BM280\_HUM\_CALIB\_FIRST@{BM280\_HUM\_CALIB\_FIRST}!Calibration Registers@{Calibration Registers}}
+\doxysubsubsubsubsubsection{\texorpdfstring{BM280\_HUM\_CALIB\_FIRST}{BM280\_HUM\_CALIB\_FIRST}}
+{\footnotesize\ttfamily \label{group___b_m280__calibration__registers_ga9c5e4a1116225de64a02e93332dcac35} 
+\#define BM280\+\_\+\+HUM\+\_\+\+CALIB\+\_\+\+FIRST~0x\+A1}
+
+
+
+Definition at line \mbox{\hyperlink{bm280__registers_8h_source_l00097}{97}} of file \mbox{\hyperlink{bm280__registers_8h_source}{bm280\+\_\+registers.\+h}}.
+
+\Hypertarget{group___b_m280__calibration__registers_ga8090df6e039c5a1acbcc952a46000495}\index{Calibration Registers@{Calibration Registers}!BM280\_HUM\_CALIB\_FIRST\_LEN@{BM280\_HUM\_CALIB\_FIRST\_LEN}}
+\index{BM280\_HUM\_CALIB\_FIRST\_LEN@{BM280\_HUM\_CALIB\_FIRST\_LEN}!Calibration Registers@{Calibration Registers}}
+\doxysubsubsubsubsubsection{\texorpdfstring{BM280\_HUM\_CALIB\_FIRST\_LEN}{BM280\_HUM\_CALIB\_FIRST\_LEN}}
+{\footnotesize\ttfamily \label{group___b_m280__calibration__registers_ga8090df6e039c5a1acbcc952a46000495} 
+\#define BM280\+\_\+\+HUM\+\_\+\+CALIB\+\_\+\+FIRST\+\_\+\+LEN~1}
+
+
+
+Definition at line \mbox{\hyperlink{bm280__registers_8h_source_l00098}{98}} of file \mbox{\hyperlink{bm280__registers_8h_source}{bm280\+\_\+registers.\+h}}.
+
+\Hypertarget{group___b_m280__calibration__registers_gad5d0097e38fac71a01bbf39eb20c838d}\index{Calibration Registers@{Calibration Registers}!BM280\_PRESS\_CALIB\_PARAM\_START@{BM280\_PRESS\_CALIB\_PARAM\_START}}
+\index{BM280\_PRESS\_CALIB\_PARAM\_START@{BM280\_PRESS\_CALIB\_PARAM\_START}!Calibration Registers@{Calibration Registers}}
+\doxysubsubsubsubsubsection{\texorpdfstring{BM280\_PRESS\_CALIB\_PARAM\_START}{BM280\_PRESS\_CALIB\_PARAM\_START}}
+{\footnotesize\ttfamily \label{group___b_m280__calibration__registers_gad5d0097e38fac71a01bbf39eb20c838d} 
+\#define BM280\+\_\+\+PRESS\+\_\+\+CALIB\+\_\+\+PARAM\+\_\+\+START~0x8E}
+
+
+
+Definition at line \mbox{\hyperlink{bm280__registers_8h_source_l00094}{94}} of file \mbox{\hyperlink{bm280__registers_8h_source}{bm280\+\_\+registers.\+h}}.
+
+\Hypertarget{group___b_m280__calibration__registers_ga415f6e7cf8d78c3ddeda6f0d1a923a26}\index{Calibration Registers@{Calibration Registers}!BM280\_PRESS\_PARAMS\_LEN@{BM280\_PRESS\_PARAMS\_LEN}}
+\index{BM280\_PRESS\_PARAMS\_LEN@{BM280\_PRESS\_PARAMS\_LEN}!Calibration Registers@{Calibration Registers}}
+\doxysubsubsubsubsubsection{\texorpdfstring{BM280\_PRESS\_PARAMS\_LEN}{BM280\_PRESS\_PARAMS\_LEN}}
+{\footnotesize\ttfamily \label{group___b_m280__calibration__registers_ga415f6e7cf8d78c3ddeda6f0d1a923a26} 
+\#define BM280\+\_\+\+PRESS\+\_\+\+PARAMS\+\_\+\+LEN~18}
+
+
+
+Definition at line \mbox{\hyperlink{bm280__registers_8h_source_l00095}{95}} of file \mbox{\hyperlink{bm280__registers_8h_source}{bm280\+\_\+registers.\+h}}.
+
+\Hypertarget{group___b_m280__calibration__registers_gab1f25d19f6c866ecce875c8c7ab2433d}\index{Calibration Registers@{Calibration Registers}!BM280\_TEMP\_CALIB\_PARAM\_START@{BM280\_TEMP\_CALIB\_PARAM\_START}}
+\index{BM280\_TEMP\_CALIB\_PARAM\_START@{BM280\_TEMP\_CALIB\_PARAM\_START}!Calibration Registers@{Calibration Registers}}
+\doxysubsubsubsubsubsection{\texorpdfstring{BM280\_TEMP\_CALIB\_PARAM\_START}{BM280\_TEMP\_CALIB\_PARAM\_START}}
+{\footnotesize\ttfamily \label{group___b_m280__calibration__registers_gab1f25d19f6c866ecce875c8c7ab2433d} 
+\#define BM280\+\_\+\+TEMP\+\_\+\+CALIB\+\_\+\+PARAM\+\_\+\+START~0x88}
+
+
+
+Definition at line \mbox{\hyperlink{bm280__registers_8h_source_l00091}{91}} of file \mbox{\hyperlink{bm280__registers_8h_source}{bm280\+\_\+registers.\+h}}.
+
+\Hypertarget{group___b_m280__calibration__registers_ga003a8faa075d6a5683ef39f962ed502f}\index{Calibration Registers@{Calibration Registers}!BM280\_TEMP\_PARAMS\_LEN@{BM280\_TEMP\_PARAMS\_LEN}}
+\index{BM280\_TEMP\_PARAMS\_LEN@{BM280\_TEMP\_PARAMS\_LEN}!Calibration Registers@{Calibration Registers}}
+\doxysubsubsubsubsubsection{\texorpdfstring{BM280\_TEMP\_PARAMS\_LEN}{BM280\_TEMP\_PARAMS\_LEN}}
+{\footnotesize\ttfamily \label{group___b_m280__calibration__registers_ga003a8faa075d6a5683ef39f962ed502f} 
+\#define BM280\+\_\+\+TEMP\+\_\+\+PARAMS\+\_\+\+LEN~6}
+
+
+
+Definition at line \mbox{\hyperlink{bm280__registers_8h_source_l00092}{92}} of file \mbox{\hyperlink{bm280__registers_8h_source}{bm280\+\_\+registers.\+h}}.
+
