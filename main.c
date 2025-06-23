@@ -7,6 +7,7 @@
     #define WIFI_POLLING_MS 100
     #define DEVICE_POLLING_MS 5000
     #define MQTT_PUBLISH_MS 20000
+    #define BLINK_INTERVAL_MS 1000
 
     int main()
     {
@@ -32,6 +33,9 @@
         
         absolute_time_t next_device_poll = make_timeout_time_ms(DEVICE_POLLING_MS);
         absolute_time_t next_publish = make_timeout_time_ms(MQTT_PUBLISH_MS);
+        absolute_time_t next_blink = make_timeout_time_ms(BLINK_INTERVAL_MS);
+
+        uint8_t led_on = 0;
 
         int err = 0;
 
@@ -61,6 +65,13 @@
                     }
 
                     next_device_poll = make_timeout_time_ms(DEVICE_POLLING_MS);
+                }
+
+                if(absolute_time_diff_us(get_absolute_time(), next_blink) <= 0) {
+                    led_on = !led_on;
+                    cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, led_on);
+
+                    next_blink = make_timeout_time_ms(BLINK_INTERVAL_MS);
                 }
             }
             
