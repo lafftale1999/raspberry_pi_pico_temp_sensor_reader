@@ -1,0 +1,3 @@
+[submodule "lib/bme280"]
+	path = lib/bme280
+	url = https://github.com/lafftale1999/bme280_driver.git
