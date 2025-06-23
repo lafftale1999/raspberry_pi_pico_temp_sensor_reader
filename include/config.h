@@ -1,9 +1,0 @@
-#ifndef RPI_PICO_W_BM280_CONFIG_H
-#define RPI_PICO_W_BM280_CONFIG_H
-
-typedef enum {
-    PICO_W_OK,
-    PICO_W_FAIL
-}PICO_W_RETURN_STATUS;
-
-#endif

@@ -61,7 +61,7 @@ extern "C" {
  * @brief Macros for logging messages
  * @{
  */
-#define BM280_DEBUG 1
+#define BM280_DEBUG 0
 #if BM280_DEBUG
 #define BM280_LOG(...) printf(__VA_ARGS__)
 #else

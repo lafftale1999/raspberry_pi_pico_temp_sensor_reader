@@ -21,7 +21,7 @@ extern "C" {
 
 /** 
  * @defgroup BM280_json_defines BM280 JSON defines
- * @brief Definitions for parson the BM280 values to a JSON string
+ * @brief Definitions for parsing the BM280 values to a JSON string
  * @{
 */
 #define BM280_JSON_TEMP_KEY                 "temperature"
