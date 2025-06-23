@@ -6,7 +6,7 @@
 
     #define WIFI_POLLING_MS 100
     #define DEVICE_POLLING_MS 5000
-    #define MQTT_PUBLISH_MS 10000
+    #define MQTT_PUBLISH_MS 20000
 
     int main()
     {
@@ -33,31 +33,37 @@
         absolute_time_t next_device_poll = make_timeout_time_ms(DEVICE_POLLING_MS);
         absolute_time_t next_publish = make_timeout_time_ms(MQTT_PUBLISH_MS);
 
+        int err = 0;
+
         while(1) {
             cyw43_arch_poll();
 
-            if (MQTT_poll(mqtt_handle) != 0) {
+            err = wifi_check_connection();
+
+            if(err == WIFI_STATUS_CONNECTED) {
+                if (MQTT_poll(mqtt_handle) != 0) {
                 printf("Unable to send messages\n");
-            }
-
-            if(absolute_time_diff_us(get_absolute_time(), next_publish) <= 0) {
-                printf("Publish to topic\n");
-
-                if (MQTT_publish(mqtt_handle, "/room_meas", BM280_get_json(bm280_handle)) != 0) {
-                    printf("Publish failed\n");
                 }
 
-                next_publish = make_timeout_time_ms(MQTT_PUBLISH_MS);
-            }
+                if(absolute_time_diff_us(get_absolute_time(), next_publish) <= 0) {
+                    printf("Publish to topic\n");
 
-            if(absolute_time_diff_us(get_absolute_time(), next_device_poll) <= 0) {
-                if (bm280_read_data(bm280_handle) != PICO_W_OK) {
-                    printf("Failed to read data from BM280\n");
+                    if (MQTT_publish(mqtt_handle, "/room_meas", BM280_get_json(bm280_handle)) != 0) {
+                        printf("Publish failed\n");
+                    }
+
+                    next_publish = make_timeout_time_ms(MQTT_PUBLISH_MS);
                 }
 
-                next_device_poll = make_timeout_time_ms(DEVICE_POLLING_MS);
-            }
+                if(absolute_time_diff_us(get_absolute_time(), next_device_poll) <= 0) {
+                    if (bm280_read_data(bm280_handle) != PICO_W_OK) {
+                        printf("Failed to read data from BM280\n");
+                    }
 
+                    next_device_poll = make_timeout_time_ms(DEVICE_POLLING_MS);
+                }
+            }
+            
             cyw43_arch_wait_for_work_until(make_timeout_time_ms(100));
         }
     }
