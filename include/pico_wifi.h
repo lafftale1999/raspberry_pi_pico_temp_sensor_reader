@@ -5,6 +5,8 @@
 
 #include "config.h"
 
+#define WIFI_CONNECT_TIMEOUT_MS 20000
+
 typedef enum{
     WIFI_STATUS_CONNECTED,
     WIFI_STATUS_NOT_CONNECTED,

@@ -12,7 +12,7 @@ PICO_WIFI_STATUS wifi_init() {
     cyw43_arch_enable_sta_mode();
 
     printf("Connecting to Wi-Fi...\n");
-    if (cyw43_arch_wifi_connect_timeout_ms(WIFI_SSID, WIFI_PASS, CYW43_AUTH_WPA2_AES_PSK, 30000)) {
+    if (cyw43_arch_wifi_connect_timeout_ms(WIFI_SSID, WIFI_PASS, CYW43_AUTH_WPA2_AES_PSK, WIFI_CONNECT_TIMEOUT_MS)) {
         printf("failed to connect.\n");
         return WIFI_STATUS_NOT_CONNECTED;
     }
@@ -31,11 +31,11 @@ PICO_WIFI_STATUS wifi_check_connection() {
         printf("Connection lost....\n");
         printf("Trying to reconnect...\n");
 
-        if(cyw43_arch_wifi_connect_timeout_ms(WIFI_SSID, WIFI_PASS, CYW43_AUTH_WPA2_AES_PSK, 30000) == 0) {
+        if(cyw43_arch_wifi_connect_timeout_ms(WIFI_SSID, WIFI_PASS, CYW43_AUTH_WPA2_AES_PSK, WIFI_CONNECT_TIMEOUT_MS) == 0) {
             printf("Reconnected!\n");
             return WIFI_STATUS_RE_CONNECTED;
         }
-        
+
         return WIFI_STATUS_NOT_CONNECTED;
     }
     return WIFI_STATUS_CONNECTED;

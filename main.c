@@ -3,6 +3,7 @@
     #include "include/pico_wifi.h"
     #include "include/pico_mqtt.h"
     #include "pico/time.h"
+    #include "hardware/watchdog.h"
 
     #define WIFI_POLLING_MS 100
     #define DEVICE_POLLING_MS 5000
@@ -14,7 +15,6 @@
         stdio_init_all();
         sleep_ms(5000);
 
-        printf("Start I2C init\n");
         if (i2c_open() == PICO_W_OK) {
             printf("i2c init succesful!\n");
         }
@@ -46,7 +46,9 @@
 
             if(err == WIFI_STATUS_CONNECTED) {
                 if (MQTT_poll(mqtt_handle) != 0) {
-                printf("Unable to send messages\n");
+                    if(MQTT_reconnect(&mqtt_handle) != 0) {
+                        watchdog_reboot(0,0,0);
+                    }
                 }
 
                 if(absolute_time_diff_us(get_absolute_time(), next_publish) <= 0) {
@@ -73,6 +75,16 @@
 
                     next_blink = make_timeout_time_ms(BLINK_INTERVAL_MS);
                 }
+            }
+
+            else if(err == WIFI_STATUS_RE_CONNECTED) {
+                if(MQTT_reconnect(&mqtt_handle) != 0) {
+                    watchdog_reboot(0,0,0);
+                }
+            }
+
+            else if(err == WIFI_STATUS_NOT_CONNECTED) {
+                watchdog_reboot(0,0,0);
             }
             
             cyw43_arch_wait_for_work_until(make_timeout_time_ms(100));
