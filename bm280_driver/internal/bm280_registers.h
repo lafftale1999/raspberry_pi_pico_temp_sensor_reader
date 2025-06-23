@@ -23,9 +23,9 @@ extern "C" {
  * @brief Registers used for identification and reset.
  * @{
  */
-#define BM280_ID_REG                    0xD0  /** Chip ID register (expected value: 0x60) */
-#define BM280_RESET_REGISTER            0xE0  /** Reset register */
-#define BM280_WRITE_RESET_BITS          0xB6  /** Command to trigger a software reset */
+#define BM280_ID_REG                    0xD0  /**< Chip ID register (expected value: 0x60) */
+#define BM280_RESET_REGISTER            0xE0  /**< Reset register */
+#define BM280_WRITE_RESET_BITS          0xB6  /**< Command to trigger a software reset */
 /** @} */
 
 /**
