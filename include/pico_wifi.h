@@ -3,8 +3,6 @@
 
 #include "pico/cyw43_arch.h"
 
-#include "config.h"
-
 #define WIFI_CONNECT_TIMEOUT_MS 20000
 
 typedef enum{

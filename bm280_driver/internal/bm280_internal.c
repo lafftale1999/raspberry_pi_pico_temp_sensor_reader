@@ -59,7 +59,7 @@ int bm280_calibration(const bm280_handle_t handle)
     uint8_t t_p_param_start = BM280_TEMP_CALIB_PARAM_START;
     // read temperature and pressure calibration values
     
-    if (i2c_read_data(&handle->i2c_address, &t_p_param_start, buf, BM280_TEMP_PARAMS_LEN + BM280_PRESS_PARAMS_LEN) != PICO_W_OK) {
+    if (i2c_read_data(&handle->i2c_address, &t_p_param_start, buf, BM280_TEMP_PARAMS_LEN + BM280_PRESS_PARAMS_LEN) != 0) {
         BM280_LOG("Unable to read temperature and pressure calibration values\n");
         return 1;
     }
@@ -70,8 +70,8 @@ int bm280_calibration(const bm280_handle_t handle)
     };
 
     // read humidity calibration values
-    if (i2c_read_data(&handle->i2c_address, &hum_param[0], &buf[24], BM280_HUM_CALIB_FIRST_LEN) != PICO_W_OK ||
-        i2c_read_data(&handle->i2c_address, &hum_param[1], &buf[25], BM280_HUM_CALIB_CONTINUE_LEN) != PICO_W_OK) {
+    if (i2c_read_data(&handle->i2c_address, &hum_param[0], &buf[24], BM280_HUM_CALIB_FIRST_LEN) != 0 ||
+        i2c_read_data(&handle->i2c_address, &hum_param[1], &buf[25], BM280_HUM_CALIB_CONTINUE_LEN) != 0) {
         BM280_LOG("Unable to read humidity calibration values\n");
         return 1;
     }

@@ -42,7 +42,7 @@ int bm280_read_data(const bm280_handle_t handle)
     handle->temp_raw = (buf[3] << 12) | (buf[4] << 4) | (buf[5] >> 4);
     handle->hum_raw = (buf[6] << 8) | buf[7];
 
-    if(bm280_convert_measurements(handle) != PICO_W_OK) {
+    if(bm280_convert_measurements(handle) != 0) {
         BM280_LOG("Unable to convert values.\n");
         return 1;
     }
@@ -77,7 +77,7 @@ int bm280_init(bm280_handle_t *handle, const uint8_t device_address, const BM280
     p_handle->i2c_address = device_address;
     p_handle->address_length = BM280_ADDRESS_LENGTH;
     
-    if (bm280_calibration(p_handle) != PICO_W_OK) {
+    if (bm280_calibration(p_handle) != 0) {
         goto exit;
     }
 

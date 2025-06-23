@@ -1,4 +1,5 @@
     #include "include/i2c_pico.h"
+    #include "pico_log.h"
     #include "bm280_driver/bm280.h"
     #include "include/pico_wifi.h"
     #include "include/pico_mqtt.h"
@@ -15,20 +16,18 @@
         stdio_init_all();
         sleep_ms(5000);
 
-        if (i2c_open() == PICO_W_OK) {
-            printf("i2c init succesful!\n");
-        }
+        i2c_open();
 
         bm280_handle_t bm280_handle = NULL;
-        if (bm280_init(&bm280_handle, 0x76, INTERVAL_1000MS) == PICO_W_OK) {
-            printf("device succesfully init\n");
+        if (bm280_init(&bm280_handle, 0x76, INTERVAL_1000MS) == 0) {
+            PICO_LOGI("device succesfully init\n");
         }
 
         wifi_init();
 
         MQTT_client_handle_t mqtt_handle = NULL;
         if (MQTT_open(&mqtt_handle) == 0) {
-            printf("Mqtt initiated correctly\n");
+            PICO_LOGI("Mqtt initiated correctly\n");
         }
         
         absolute_time_t next_device_poll = make_timeout_time_ms(DEVICE_POLLING_MS);
@@ -52,18 +51,18 @@
                 }
 
                 if(absolute_time_diff_us(get_absolute_time(), next_publish) <= 0) {
-                    printf("Publish to topic\n");
+                    PICO_LOGI("Publish to topic\n");
 
                     if (MQTT_publish(mqtt_handle, "/room_meas", BM280_get_json(bm280_handle)) != 0) {
-                        printf("Publish failed\n");
+                        PICO_LOGI("Publish failed\n");
                     }
 
                     next_publish = make_timeout_time_ms(MQTT_PUBLISH_MS);
                 }
 
                 if(absolute_time_diff_us(get_absolute_time(), next_device_poll) <= 0) {
-                    if (bm280_read_data(bm280_handle) != PICO_W_OK) {
-                        printf("Failed to read data from BM280\n");
+                    if (bm280_read_data(bm280_handle) != 0) {
+                        PICO_LOGI("Failed to read data from BM280\n");
                     }
 
                     next_device_poll = make_timeout_time_ms(DEVICE_POLLING_MS);

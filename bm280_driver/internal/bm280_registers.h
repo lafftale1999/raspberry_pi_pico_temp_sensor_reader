@@ -61,7 +61,7 @@ extern "C" {
 /**
  * @defgroup BM280_read_data_registers Read Data Registers
  * @ingroup bm280_registers
- * @brief Registers for reading raw sensor measurement values.
+ * @brief Registers for reading raw sensor measurement values. The data-registers are place sequentially in memory.
  * @{
  */
 
