@@ -1,0 +1,111 @@
+\doxysubsubsection{Measurements Settings }
+\hypertarget{group___b_m280__measurement__settings}{}\label{group___b_m280__measurement__settings}\index{Measurements Settings@{Measurements Settings}}
+
+
+The settings available for Oversampling and IIR filter.  
+
+
+\doxysubsubsubsubsection*{Topics}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{group___b_m280__oversampling__macros}{Oversampling Macros}}
+\begin{DoxyCompactList}\small\item\em Macros to configure temperature, pressure, and humidity oversampling. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___b_m280__osrs}{Oversampling Rates}}
+\begin{DoxyCompactList}\small\item\em Predefined constants for oversampling settings in the BM280 sensor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___b_m280__iir}{IIR Settings}}
+\begin{DoxyCompactList}\small\item\em Predefined constants for IIR settings in the BM280 sensor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{group___b_m280__measurement__settings_gaeb7d34ba6af53f8137b5a6272248cf8d}{BM280\+\_\+\+SET\+\_\+\+STANDBY\+\_\+\+MS}}(ms)
+\begin{DoxyCompactList}\small\item\em Macro for setting the standby interval. This will decide for how long the BM280 will sleep between taking measurements. (Only effective in BM280\+\_\+\+MODE\+\_\+\+NORMAL) \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group___b_m280__measurement__settings_ga1e5b40201feff15f92a6f78b661b18ef}{BM280\+\_\+\+SET\+\_\+\+IIR\+\_\+\+FILTER}}(fs)
+\begin{DoxyCompactList}\small\item\em Macros to configure temperature, pressure, and humidity oversampling. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsubsection{Detailed Description}
+The settings available for Oversampling and IIR filter. 
+
+
+
+\label{doc-define-members}
+\Hypertarget{group___b_m280__measurement__settings_doc-define-members}
+\doxysubsubsubsection{Macro Definition Documentation}
+\Hypertarget{group___b_m280__measurement__settings_ga1e5b40201feff15f92a6f78b661b18ef}\index{Measurements Settings@{Measurements Settings}!BM280\_SET\_IIR\_FILTER@{BM280\_SET\_IIR\_FILTER}}
+\index{BM280\_SET\_IIR\_FILTER@{BM280\_SET\_IIR\_FILTER}!Measurements Settings@{Measurements Settings}}
+\doxysubsubsubsubsection{\texorpdfstring{BM280\_SET\_IIR\_FILTER}{BM280\_SET\_IIR\_FILTER}}
+{\footnotesize\ttfamily \label{group___b_m280__measurement__settings_ga1e5b40201feff15f92a6f78b661b18ef} 
+\#define BM280\+\_\+\+SET\+\_\+\+IIR\+\_\+\+FILTER(\begin{DoxyParamCaption}\item[{}]{fs}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{((((fs)\ \&\ 0x07)\ <<\ 2)\ |\ \mbox{\hyperlink{group___b_m280__registers__configurations_gafcbddc36bbd083f03dcfe58f4662b4ee}{BM280\_CONFIG\_REGISTER}})}
+
+\end{DoxyCode}
+
+
+Macros to configure temperature, pressure, and humidity oversampling. 
+
+This macros generate a bitfield for use in writing to BM280 control registers. Use the following values for oversampling\+:
+\begin{DoxyItemize}
+\item BM280\+\_\+\+SET\+\_\+\+FILTER\+\_\+\+OFF
+\item BM280\+\_\+\+SET\+\_\+\+FILTER\+\_\+2
+\item BM280\+\_\+\+SET\+\_\+\+FILTER\+\_\+4
+\item BM280\+\_\+\+SET\+\_\+\+FILTER\+\_\+8
+\item BM280\+\_\+\+SET\+\_\+\+FILTER\+\_\+16
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em fs} & Filter settings from the predefined BM280\+\_\+\+SET\+\_\+\+FILTER\+\_\+\+XXX \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Bitfield for BM280\+\_\+\+CONFIG\+\_\+\+REGISTER 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{bm280__settings_8h_source_l00066}{66}} of file \mbox{\hyperlink{bm280__settings_8h_source}{bm280\+\_\+settings.\+h}}.
+
+\Hypertarget{group___b_m280__measurement__settings_gaeb7d34ba6af53f8137b5a6272248cf8d}\index{Measurements Settings@{Measurements Settings}!BM280\_SET\_STANDBY\_MS@{BM280\_SET\_STANDBY\_MS}}
+\index{BM280\_SET\_STANDBY\_MS@{BM280\_SET\_STANDBY\_MS}!Measurements Settings@{Measurements Settings}}
+\doxysubsubsubsubsection{\texorpdfstring{BM280\_SET\_STANDBY\_MS}{BM280\_SET\_STANDBY\_MS}}
+{\footnotesize\ttfamily \label{group___b_m280__measurement__settings_gaeb7d34ba6af53f8137b5a6272248cf8d} 
+\#define BM280\+\_\+\+SET\+\_\+\+STANDBY\+\_\+\+MS(\begin{DoxyParamCaption}\item[{}]{ms}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{((((ms)\ \&\ 0x07)\ <<\ 5)\ |\ \mbox{\hyperlink{group___b_m280__registers__configurations_gafcbddc36bbd083f03dcfe58f4662b4ee}{BM280\_CONFIG\_REGISTER}})}
+
+\end{DoxyCode}
+
+
+Macro for setting the standby interval. This will decide for how long the BM280 will sleep between taking measurements. (Only effective in BM280\+\_\+\+MODE\+\_\+\+NORMAL) 
+
+This macro generate a bitfield for use in writing to BM280 configuration register. Use the following values\+:
+\begin{DoxyItemize}
+\item INTERVAL\+\_\+0\+\_\+5\+MS
+\item INTERVAL\+\_\+62\+\_\+5\+MS
+\item INTERVAL\+\_\+125\+MS
+\item INTEVAL\+\_\+250\+MS
+\item INTERVAL\+\_\+500\+MS
+\item INTERVAL\+\_\+1000\+MS
+\item INTERVAL\+\_\+10\+MS
+\item INTERVAL\+\_\+20\+MS
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em ms} & Use the enum BM280\+\_\+\+READ\+\_\+\+INTERVALS\+\_\+\+MS for the pre-\/defined values \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Bitfield for BM280\+\_\+\+CONFIG\+\_\+\+REGISTER 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{bm280__settings_8h_source_l00049}{49}} of file \mbox{\hyperlink{bm280__settings_8h_source}{bm280\+\_\+settings.\+h}}.
+
+\input{group___b_m280__oversampling__macros}
+\input{group___b_m280__osrs}
+\input{group___b_m280__iir}

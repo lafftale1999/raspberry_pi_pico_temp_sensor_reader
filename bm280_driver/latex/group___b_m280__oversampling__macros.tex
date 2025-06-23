@@ -1,0 +1,84 @@
+\doxysubsubsubsection{Oversampling Macros }
+\hypertarget{group___b_m280__oversampling__macros}{}\label{group___b_m280__oversampling__macros}\index{Oversampling Macros@{Oversampling Macros}}
+
+
+Macros to configure temperature, pressure, and humidity oversampling.  
+
+
+\doxysubsubsubsubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{group___b_m280__oversampling__macros_ga7cffb36fa9f88ed1d2306a8a4dd4a818}{BM280\+\_\+\+SET\+\_\+\+TEMP\+\_\+\+OSRS}}(osrs\+\_\+t)
+\item 
+\#define \mbox{\hyperlink{group___b_m280__oversampling__macros_gab4486749c97c910d416be671435a4c8c}{BM280\+\_\+\+SET\+\_\+\+PRESS\+\_\+\+OSRS}}(osrs\+\_\+p)
+\item 
+\#define \mbox{\hyperlink{group___b_m280__oversampling__macros_ga641361d4f94bd93368c136f40cc9a49e}{BM280\+\_\+\+SET\+\_\+\+HUM\+\_\+\+OSRS}}(osrs\+\_\+h)
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsubsubsection{Detailed Description}
+Macros to configure temperature, pressure, and humidity oversampling. 
+
+These macros generate bitfields for use in writing to BM280 control registers. Use the following values for oversampling\+:
+\begin{DoxyItemize}
+\item BM280\+\_\+\+OSRS\+\_\+\+SKIPPED
+\item BM280\+\_\+\+OSRS\+\_\+\+X1
+\item BM280\+\_\+\+OSRS\+\_\+\+X2
+\item BM280\+\_\+\+OSRS\+\_\+\+X4
+\item BM280\+\_\+\+OSRS\+\_\+\+X8
+\item BM280\+\_\+\+OSRS\+\_\+\+X16
+\end{DoxyItemize}
+
+\begin{DoxyNote}{Note}
+All macros return a bitfield; they do not write directly to registers. 
+\end{DoxyNote}
+
+
+\label{doc-define-members}
+\Hypertarget{group___b_m280__oversampling__macros_doc-define-members}
+\doxysubsubsubsubsection{Macro Definition Documentation}
+\Hypertarget{group___b_m280__oversampling__macros_ga641361d4f94bd93368c136f40cc9a49e}\index{Oversampling Macros@{Oversampling Macros}!BM280\_SET\_HUM\_OSRS@{BM280\_SET\_HUM\_OSRS}}
+\index{BM280\_SET\_HUM\_OSRS@{BM280\_SET\_HUM\_OSRS}!Oversampling Macros@{Oversampling Macros}}
+\doxysubsubsubsubsubsection{\texorpdfstring{BM280\_SET\_HUM\_OSRS}{BM280\_SET\_HUM\_OSRS}}
+{\footnotesize\ttfamily \label{group___b_m280__oversampling__macros_ga641361d4f94bd93368c136f40cc9a49e} 
+\#define BM280\+\_\+\+SET\+\_\+\+HUM\+\_\+\+OSRS(\begin{DoxyParamCaption}\item[{}]{osrs\+\_\+h}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(((osrs\_h)\ \&\ 0x07)\ |\ \mbox{\hyperlink{group___b_m280__registers__configurations_gab2fc9f862a996f26993ec24548de7156}{BM280\_CONTROL\_HUMIDITY}})}
+
+\end{DoxyCode}
+Macro to configure humidity oversampling. 
+
+Definition at line \mbox{\hyperlink{bm280__settings_8h_source_l00088}{88}} of file \mbox{\hyperlink{bm280__settings_8h_source}{bm280\+\_\+settings.\+h}}.
+
+\Hypertarget{group___b_m280__oversampling__macros_gab4486749c97c910d416be671435a4c8c}\index{Oversampling Macros@{Oversampling Macros}!BM280\_SET\_PRESS\_OSRS@{BM280\_SET\_PRESS\_OSRS}}
+\index{BM280\_SET\_PRESS\_OSRS@{BM280\_SET\_PRESS\_OSRS}!Oversampling Macros@{Oversampling Macros}}
+\doxysubsubsubsubsubsection{\texorpdfstring{BM280\_SET\_PRESS\_OSRS}{BM280\_SET\_PRESS\_OSRS}}
+{\footnotesize\ttfamily \label{group___b_m280__oversampling__macros_gab4486749c97c910d416be671435a4c8c} 
+\#define BM280\+\_\+\+SET\+\_\+\+PRESS\+\_\+\+OSRS(\begin{DoxyParamCaption}\item[{}]{osrs\+\_\+p}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{((((osrs\_p)\ \&\ 0x07)\ <<\ 2)\ |\ \mbox{\hyperlink{group___b_m280__registers__configurations_gad784b123a337bc47f10f95b2fe23c1fd}{BM280\_CONTROL\_MEASURE}})}
+
+\end{DoxyCode}
+Macro to configure pressure oversampling. 
+
+Definition at line \mbox{\hyperlink{bm280__settings_8h_source_l00087}{87}} of file \mbox{\hyperlink{bm280__settings_8h_source}{bm280\+\_\+settings.\+h}}.
+
+\Hypertarget{group___b_m280__oversampling__macros_ga7cffb36fa9f88ed1d2306a8a4dd4a818}\index{Oversampling Macros@{Oversampling Macros}!BM280\_SET\_TEMP\_OSRS@{BM280\_SET\_TEMP\_OSRS}}
+\index{BM280\_SET\_TEMP\_OSRS@{BM280\_SET\_TEMP\_OSRS}!Oversampling Macros@{Oversampling Macros}}
+\doxysubsubsubsubsubsection{\texorpdfstring{BM280\_SET\_TEMP\_OSRS}{BM280\_SET\_TEMP\_OSRS}}
+{\footnotesize\ttfamily \label{group___b_m280__oversampling__macros_ga7cffb36fa9f88ed1d2306a8a4dd4a818} 
+\#define BM280\+\_\+\+SET\+\_\+\+TEMP\+\_\+\+OSRS(\begin{DoxyParamCaption}\item[{}]{osrs\+\_\+t}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{((((osrs\_t)\ \&\ 0x07)\ <<\ 5)\ |\ \mbox{\hyperlink{group___b_m280__registers__configurations_gad784b123a337bc47f10f95b2fe23c1fd}{BM280\_CONTROL\_MEASURE}})}
+
+\end{DoxyCode}
+Macro to configure temperature oversampling. 
+
+Definition at line \mbox{\hyperlink{bm280__settings_8h_source_l00086}{86}} of file \mbox{\hyperlink{bm280__settings_8h_source}{bm280\+\_\+settings.\+h}}.
+

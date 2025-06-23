@@ -1,0 +1,35 @@
+\doxysection{bm280.\+c File Reference}
+\hypertarget{bm280_8c}{}\label{bm280_8c}\index{bm280.c@{bm280.c}}
+
+
+\+: Source code for the external implementation of the BM280 driver.  
+
+
+{\ttfamily \#include "{}internal/bm280\+\_\+internal.\+h"{}}\newline
+{\ttfamily \#include "{}../include/i2c\+\_\+pico.\+h"{}}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{group___b_m280__driver__fn__impl_ga09e7407e060bf1da231f1d34604a9932}{bm280\+\_\+read\+\_\+data}} (const \mbox{\hyperlink{group__bm280__typedefs_ga69dc55e2abccb74a10cc1957529aad92}{bm280\+\_\+handle\+\_\+t}} handle)
+\begin{DoxyCompactList}\small\item\em Read sensor data from BM280 and convert to human-\/readable values. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group___b_m280__driver__fn__impl_gae226105d8792554fcaec0eb79307b8fc}{bm280\+\_\+init}} (\mbox{\hyperlink{group__bm280__typedefs_ga69dc55e2abccb74a10cc1957529aad92}{bm280\+\_\+handle\+\_\+t}} \texorpdfstring{$\ast$}{*}handle, const uint8\+\_\+t device\+\_\+address, const \mbox{\hyperlink{group__bm280__typedefs_ga44bd18efb000beac2b8e7362d84664c7}{BM280\+\_\+\+READING\+\_\+\+INTERVALS\+\_\+\+MS}} interval)
+\begin{DoxyCompactList}\small\item\em Initialize BM280 sensor and allocate internal handle. \end{DoxyCompactList}\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{group___b_m280__driver__fn__impl_gaadecb3945281777fa0b0573729eba38e}{BM280\+\_\+get\+\_\+json}} (const \mbox{\hyperlink{group__bm280__typedefs_ga69dc55e2abccb74a10cc1957529aad92}{bm280\+\_\+handle\+\_\+t}} handle)
+\begin{DoxyCompactList}\small\item\em Get the latest sensor data as a JSON string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group___b_m280__driver__fn__impl_gaedfa675ba307976fc5cf7e33ae32e6e7}{bm280\+\_\+free}} (\mbox{\hyperlink{group__bm280__typedefs_ga69dc55e2abccb74a10cc1957529aad92}{bm280\+\_\+handle\+\_\+t}} handle)
+\begin{DoxyCompactList}\small\item\em Free memory allocated for BM280 driver handle. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\+: Source code for the external implementation of the BM280 driver. 
+
+Copyright (C) 2025 Carl Broman
+
+\begin{DoxyAuthor}{Author}
+\+: Carl Broman \href{mailto:carl.broman@yh.nackademin.se}{\texttt{carl.\+broman@yh.\+nackademin.\+se}} 
+\end{DoxyAuthor}
+
+
+Definition in file \mbox{\hyperlink{bm280_8c_source}{bm280.\+c}}.
+
