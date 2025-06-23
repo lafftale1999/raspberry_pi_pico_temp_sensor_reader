@@ -36,6 +36,9 @@ extern "C" {
 
 /* Includes --------------------------------------------------------------------------------------*/
 
+#include "hardware/gpio.h"
+#include "hardware/i2c.h"
+
 #include <stdlib.h>
 #include <stdio.h>
 #include "pico/stdio.h"
@@ -52,6 +55,18 @@ extern "C" {
 #define BM280_UNITS_ON_BUS          1       /**< Number of BM280 units connected */
 #define BM280_ADDRESSES_ON_BUS      {0x76}  /**< I2C addresses of connected BM280 units */
 #define BM280_ADDRESS_LENGTH        7       /**< BM280 I2C address length (7-bit) */
+
+  /**
+   * @defgroup bm280_i2c_config I2C Configurations
+   * @ingroup bm280_config
+   * @brief Defines for configuring the i2c setup
+   * @{
+   */
+  #define I2C_SDA_PIN                 14              /**< SDA pin */
+  #define I2C_SCL_PIN                 15              /**< SCL pin */
+  #define I2C_PORT                    i2c1            /**< Which internal i2c module is used. Often i2c0 or i2c1 */
+  #define I2C_FREQUENCY               100000          /**< Frequency for communication */
+  /** @} */
 /** @} */
 
 /* -------------------------- MACROS -------------------------------------------*/

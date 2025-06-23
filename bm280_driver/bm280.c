@@ -106,7 +106,7 @@ int bm280_init(bm280_handle_t *handle, const uint8_t device_address, const BM280
 
     *handle = p_handle;
 
-    BM280_LOG("BM280 successfully intitialized.\n");
+    BM280_LOG("BM280 successfully intitialize.\n");
     return 0;
 
 exit:
