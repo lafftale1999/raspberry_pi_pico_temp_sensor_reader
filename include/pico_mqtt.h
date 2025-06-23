@@ -36,7 +36,8 @@ int MQTT_open(MQTT_client_handle_t *handle);
 int MQTT_publish(MQTT_client_handle_t handle, const char *topic, const char *payload);
 int MQTT_subscribe(MQTT_client_handle_t handle, const char *topic);
 int MQTT_unsubscribe(MQTT_client_handle_t handle, const char *topic);
-int MQTT_close(MQTT_client_handle_t handle);
+void MQTT_close(MQTT_client_handle_t handle);
 int MQTT_poll(MQTT_client_handle_t handle);
+int MQTT_reconnect(MQTT_client_handle_t *handle);
 
 #endif

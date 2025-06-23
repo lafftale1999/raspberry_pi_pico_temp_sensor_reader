@@ -303,7 +303,7 @@ int MQTT_unsubscribe(MQTT_client_handle_t handle, const char *topic) {
     mqtt_sub_unsub(handle->mqtt_client_inst, topic, MQTT_SUB_QOS, unsub_request_cb, handle, false);
 }
 
-int MQTT_close(MQTT_client_handle_t handle) {
+void MQTT_close(MQTT_client_handle_t handle) {
     mqtt_disconnect(handle->mqtt_client_inst);
 }
 
@@ -316,4 +316,9 @@ int MQTT_poll(MQTT_client_handle_t handle) {
     }
 
     return 0;
+}
+
+int MQTT_reconnect(MQTT_client_handle_t *handle) {
+    MQTT_close(*handle);
+    return MQTT_open(handle);
 }
