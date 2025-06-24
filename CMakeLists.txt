@@ -35,7 +35,7 @@ set(PICO_USE_MBEDTLS ON)
 # Initialise the Raspberry Pi Pico SDK
 pico_sdk_init()
 
-add_subdirectory(bm280_driver)
+add_subdirectory(lib/bme280)
 
 # Add executable. Default name is the project name, version 0.1
 FILE(GLOB SRC_FILES src/*.c)
@@ -63,7 +63,7 @@ target_link_libraries(raspberry_pico_w_bme280_i2c
         pico_lwip_mqtt
         pico_lwip_mbedtls
         pico_mbedtls
-        bm280_driver
+        bme280
         )
 
 # Add the standard include files to the build
@@ -71,7 +71,7 @@ target_include_directories(raspberry_pico_w_bme280_i2c PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
         ${CMAKE_CURRENT_LIST_DIR}/include
         ${PICO_SDK_PATH}/lib/mbedtls/include
-        ${CMAKE_CURRENT_LIST_DIR}/bme280_driver
+        ${CMAKE_CURRENT_LIST_DIR}/lib/bme280
 )
 
 # Add any user requested libraries

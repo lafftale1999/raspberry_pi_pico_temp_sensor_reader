@@ -1,6 +1,5 @@
-#include "include/i2c_pico.h"
 #include "pico_log.h"
-#include "bm280_driver/bm280.h"
+#include "bme280.h"
 #include "include/pico_wifi.h"
 #include "include/pico_mqtt.h"
 #include "pico/time.h"
@@ -16,10 +15,8 @@ int main()
     stdio_init_all();
     sleep_ms(5000);
 
-    i2c_open();
-
-    bm280_handle_t bm280_handle = NULL;
-    if (bm280_init(&bm280_handle, 0x76, INTERVAL_1000MS) != 0) {
+    bme280_handle_t bm280_handle = NULL;
+    if (bme280_init(&bm280_handle, 0x76, INTERVAL_1000MS) != 0) {
         panic("Unable to initialize the BM280 handle...");
     }
     
@@ -55,7 +52,7 @@ int main()
             if(absolute_time_diff_us(get_absolute_time(), next_publish) <= 0) {
                 PICO_LOGI("Publish to topic\n");
 
-                if (MQTT_publish(mqtt_handle, "/room_meas", BM280_get_json(bm280_handle)) != 0) {
+                if (MQTT_publish(mqtt_handle, "/room_meas", bme280_get_json(bm280_handle)) != 0) {
                     PICO_LOGE("Publish failed\n");
                 }
 
@@ -63,7 +60,7 @@ int main()
             }
 
             if(absolute_time_diff_us(get_absolute_time(), next_device_poll) <= 0) {
-                if (bm280_read_data(bm280_handle) != 0) {
+                if (bme280_read_data(bm280_handle) != 0) {
                     PICO_LOGE("Failed to read data from BM280\n");
                 }
 

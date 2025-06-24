@@ -52,6 +52,7 @@
         "i2c_pico.h": "c",
         "stdint.h": "c",
         "stdio.h": "c",
-        "pico_credentials.h": "c"
+        "pico_credentials.h": "c",
+        "bme280_i2c.h": "c"
     }
 }
