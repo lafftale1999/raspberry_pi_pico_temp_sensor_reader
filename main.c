@@ -9,6 +9,7 @@
 #define DEVICE_POLLING_MS 5000
 #define MQTT_PUBLISH_MS 20000
 #define BLINK_INTERVAL_MS 1000
+#define MQTT_TOPIC "/room_meas"
 
 int main()
 {
@@ -52,7 +53,7 @@ int main()
             if(absolute_time_diff_us(get_absolute_time(), next_publish) <= 0) {
                 PICO_LOGI("Publish to topic\n");
 
-                if (MQTT_publish(mqtt_handle, "/room_meas", bme280_get_json(bm280_handle)) != 0) {
+                if (MQTT_publish(mqtt_handle, MQTT_TOPIC, bme280_get_json(bm280_handle)) != 0) {
                     PICO_LOGE("Publish failed\n");
                 }
 
