@@ -16,7 +16,7 @@ int main()
     sleep_ms(5000);
 
     bme280_handle_t bm280_handle = NULL;
-    if (bm280_init(&bm280_handle, 0x76, INTERVAL_1000MS) != 0) {
+    if (bme280_init(&bm280_handle, 0x76, INTERVAL_1000MS) != 0) {
         panic("Unable to initialize the BM280 handle...");
     }
     
@@ -52,7 +52,7 @@ int main()
             if(absolute_time_diff_us(get_absolute_time(), next_publish) <= 0) {
                 PICO_LOGI("Publish to topic\n");
 
-                if (MQTT_publish(mqtt_handle, "/room_meas", BM280_get_json(bm280_handle)) != 0) {
+                if (MQTT_publish(mqtt_handle, "/room_meas", bme280_get_json(bm280_handle)) != 0) {
                     PICO_LOGE("Publish failed\n");
                 }
 
@@ -60,7 +60,7 @@ int main()
             }
 
             if(absolute_time_diff_us(get_absolute_time(), next_device_poll) <= 0) {
-                if (bm280_read_data(bm280_handle) != 0) {
+                if (bme280_read_data(bm280_handle) != 0) {
                     PICO_LOGE("Failed to read data from BM280\n");
                 }
 
